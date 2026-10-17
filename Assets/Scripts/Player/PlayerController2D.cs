@@ -14,6 +14,7 @@ public class PlayerController2D : MonoBehaviour
     [SerializeField] private float jumpVelocity = 16f;
     [SerializeField] private float gravityScale = 4f;
     [SerializeField] private float fallGravityMultiplier = 1.7f;
+    [SerializeField] private float maxFallSpeed = 22f;
     [SerializeField] private float jumpCutMultiplier = 0.45f;
     [SerializeField] private float coyoteTime = 0.1f;
     [SerializeField] private float jumpBufferTime = 0.12f;
@@ -43,6 +44,7 @@ public class PlayerController2D : MonoBehaviour
     private float dodgeTimer;
     private float dodgeCooldownTimer;
     private float dodgeDirection;
+    private float knockbackTimer;
     private int facing = 1;
     private bool wasGrounded;
     private bool isDodging;
@@ -50,7 +52,9 @@ public class PlayerController2D : MonoBehaviour
 
     public bool IsGrounded { get; private set; }
     public bool IsDodging => isDodging;
+    public bool IsKnockedBack => knockbackTimer > 0f;
     public Vector2 Velocity => body != null ? body.velocity : Vector2.zero;
+    public Vector2 SpawnPoint => spawnPoint;
     public int Facing => facing;
 
     private void Awake()
@@ -84,6 +88,7 @@ public class PlayerController2D : MonoBehaviour
 
         if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.K))
             && dodgeCooldownTimer <= 0f
+            && knockbackTimer <= 0f
             && !isDodging
             && (IsGrounded || canAirDodge))
         {
@@ -92,7 +97,7 @@ public class PlayerController2D : MonoBehaviour
 
         if (transform.position.y < killY)
         {
-            Respawn();
+            RespawnAtSpawnPoint();
         }
 
         if (visual != null)
@@ -108,6 +113,7 @@ public class PlayerController2D : MonoBehaviour
 
         jumpBufferTimer = Mathf.Max(0f, jumpBufferTimer - dt);
         dodgeCooldownTimer = Mathf.Max(0f, dodgeCooldownTimer - dt);
+        knockbackTimer = Mathf.Max(0f, knockbackTimer - dt);
 
         UpdateGrounded();
 
@@ -131,11 +137,14 @@ public class PlayerController2D : MonoBehaviour
         }
         else
         {
-            ApplyHorizontalMovement(dt);
-
-            if (jumpBufferTimer > 0f && coyoteTimer > 0f)
+            if (knockbackTimer <= 0f)
             {
-                Jump();
+                ApplyHorizontalMovement(dt);
+
+                if (jumpBufferTimer > 0f && coyoteTimer > 0f)
+                {
+                    Jump();
+                }
             }
         }
 
@@ -189,7 +198,13 @@ public class PlayerController2D : MonoBehaviour
             return;
         }
 
-        body.gravityScale = body.velocity.y < 0f ? gravityScale * fallGravityMultiplier : gravityScale;
+        bool slowMotion = Time.timeScale < 0.99f;
+        body.gravityScale = !slowMotion && body.velocity.y < 0f ? gravityScale * fallGravityMultiplier : gravityScale;
+
+        if (body.velocity.y < -maxFallSpeed)
+        {
+            body.velocity = new Vector2(body.velocity.x, -maxFallSpeed);
+        }
     }
 
     private void StartDodge()
@@ -222,12 +237,25 @@ public class PlayerController2D : MonoBehaviour
         wasGrounded = IsGrounded;
     }
 
-    private void Respawn()
+    public void ApplyKnockback(Vector2 impulse, float lockDuration)
+    {
+        isDodging = false;
+        knockbackTimer = Mathf.Max(knockbackTimer, lockDuration);
+        jumpBufferTimer = 0f;
+        coyoteTimer = 0f;
+        body.gravityScale = gravityScale;
+        body.velocity = impulse;
+    }
+
+    public void RespawnAtSpawnPoint()
     {
         isDodging = false;
         dodgeCooldownTimer = 0f;
+        dodgeTimer = 0f;
+        knockbackTimer = 0f;
         body.velocity = Vector2.zero;
         body.gravityScale = gravityScale;
         transform.position = spawnPoint;
+        body.position = spawnPoint;
     }
 }
