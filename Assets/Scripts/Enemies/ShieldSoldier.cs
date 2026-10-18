@@ -375,10 +375,16 @@ public class ShieldSoldier : MonoBehaviour, IDamageable, ITypedDamageable
 
     private void BeginChargeWindup()
     {
+        PlayerMana.ReportCombatActivity();
         FaceTarget();
         StopHorizontal();
         ChangeState(State.ChargeWindup);
         stateTimer = windupDuration;
+
+        if (AudioDirector.Instance != null)
+        {
+            AudioDirector.Instance.PlayEnemyWindup();
+        }
     }
 
     private void BeginCharge()
@@ -616,6 +622,12 @@ public class ShieldSoldier : MonoBehaviour, IDamageable, ITypedDamageable
 
         health = Mathf.Max(0f, health - appliedDamage);
         UpdateHealthBar();
+
+        if (AudioDirector.Instance != null)
+        {
+            AudioDirector.Instance.PlayEnemyHurt();
+        }
+
         ImpactFx.Spawn(hitPoint, blocked
             ? new Color(0.55f, 0.8f, 1f, 0.95f)
             : new Color(1f, 0.45f, 0.3f, 0.95f), 0.65f);

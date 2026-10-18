@@ -279,10 +279,16 @@ public class RangedSoldier : MonoBehaviour, IDamageable
 
     private void BeginAim()
     {
+        PlayerMana.ReportCombatActivity();
         FaceTarget();
         StopHorizontal();
         ChangeState(State.Aim);
         stateTimer = aimWindup * aimTrackingSplit;
+
+        if (AudioDirector.Instance != null)
+        {
+            AudioDirector.Instance.PlayEnemyWindup();
+        }
     }
 
     private void BeginRetreat()
@@ -580,6 +586,12 @@ public class RangedSoldier : MonoBehaviour, IDamageable
         health = Mathf.Max(0f, health - amount);
         flashTimer = flashDuration;
         UpdateHealthBar();
+
+        if (AudioDirector.Instance != null)
+        {
+            AudioDirector.Instance.PlayEnemyHurt();
+        }
+
         ImpactFx.Spawn(hitPoint, new Color(1f, 0.45f, 0.3f, 0.95f), 0.65f);
 
         if (state == State.Patrol && CanSeeTarget())

@@ -266,6 +266,7 @@ public class TalismanDrawingSystem : MonoBehaviour
         if (playerMana != null)
         {
             playerMana.TrySpend(manaCost);
+            playerMana.NotifyCombatActivity();
         }
 
         ClearTalisman(false);
@@ -369,6 +370,11 @@ public class TalismanDrawingSystem : MonoBehaviour
             savedTimeScale = Time.timeScale > 0.001f ? Time.timeScale : 1f;
             Time.timeScale = Mathf.Clamp(bulletTimeScale, 0.01f, 1f);
             bulletTimeActive = true;
+
+            if (AudioDirector.Instance != null)
+            {
+                AudioDirector.Instance.SetBulletTime(true);
+            }
         }
         else if (!wantsSlowMotion && bulletTimeActive)
         {
@@ -385,6 +391,11 @@ public class TalismanDrawingSystem : MonoBehaviour
 
         Time.timeScale = savedTimeScale > 0f ? savedTimeScale : 1f;
         bulletTimeActive = false;
+
+        if (AudioDirector.Instance != null)
+        {
+            AudioDirector.Instance.SetBulletTime(false);
+        }
     }
 
     private void HandlePointer()
@@ -438,6 +449,11 @@ public class TalismanDrawingSystem : MonoBehaviour
         LastStrokeCount = strokes.Count;
         Status = "绘制中";
         PaintDot(point);
+
+        if (AudioDirector.Instance != null)
+        {
+            AudioDirector.Instance.PlayWriting();
+        }
     }
 
     private void AddPoint(Vector2 point)

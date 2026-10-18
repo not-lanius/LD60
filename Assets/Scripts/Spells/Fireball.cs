@@ -32,6 +32,11 @@ public class Fireball : MonoBehaviour
         {
             body.velocity = normalizedDirection * speed;
         }
+
+        if (AudioDirector.Instance != null)
+        {
+            AudioDirector.Instance.PlayFireWhoosh();
+        }
     }
 
     private void Update()
@@ -59,7 +64,14 @@ public class Fireball : MonoBehaviour
         if (damageable != null)
         {
             DamageApplier.Apply(damageable, damage, transform.position, transform.right, DamageType.Spell);
+            PlayerMana.ReportCombatActivity();
             ImpactFx.Spawn(transform.position);
+
+            if (AudioDirector.Instance != null)
+            {
+                AudioDirector.Instance.PlayFireImpact();
+            }
+
             Destroy(gameObject);
             return;
         }
@@ -67,6 +79,12 @@ public class Fireball : MonoBehaviour
         if (((1 << other.gameObject.layer) & obstacleMask) != 0)
         {
             ImpactFx.Spawn(transform.position, new Color(0.85f, 0.8f, 0.7f, 0.8f));
+
+            if (AudioDirector.Instance != null)
+            {
+                AudioDirector.Instance.PlayFireImpact();
+            }
+
             Destroy(gameObject);
         }
     }

@@ -5,6 +5,7 @@ public class ManaBarUI : MonoBehaviour
 {
     [SerializeField] private PlayerMana playerMana;
     [SerializeField] private Image fillImage;
+    [SerializeField] private Text valueText;
     [SerializeField] private float smoothSpeed = 10f;
 
     private float targetFill = 1f;
@@ -41,6 +42,11 @@ public class ManaBarUI : MonoBehaviour
     private void HandleManaChanged(int current, int max)
     {
         targetFill = max > 0 ? Mathf.Clamp01((float)current / max) : 0f;
+
+        if (valueText != null)
+        {
+            valueText.text = $"{current}/{max}";
+        }
     }
 
     private void Update()

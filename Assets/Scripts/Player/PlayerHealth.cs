@@ -17,6 +17,7 @@ public class PlayerHealth : MonoBehaviour
     private bool flashOn;
     private bool isDead;
     private PlayerController2D controller;
+    private PlayerMana mana;
     private SpriteRenderer spriteRenderer;
     private Color baseColor = Color.white;
 
@@ -29,6 +30,7 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth = maxHealth;
         controller = GetComponent<PlayerController2D>();
+        mana = GetComponent<PlayerMana>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         if (spriteRenderer != null)
         {
@@ -70,7 +72,17 @@ public class PlayerHealth : MonoBehaviour
 
     public bool TakeDamage(int amount, Vector2 knockback)
     {
-        if (isDead || amount <= 0 || invulnerabilityTimer > 0f)
+        if (isDead || amount <= 0)
+        {
+            return false;
+        }
+
+        if (mana != null)
+        {
+            mana.NotifyCombatActivity();
+        }
+
+        if (invulnerabilityTimer > 0f)
         {
             return false;
         }
@@ -80,6 +92,11 @@ public class PlayerHealth : MonoBehaviour
         invulnerabilityTimer = invulnerabilityDuration;
         flashTimer = 0f;
 
+        if (currentHealth > 0 && AudioDirector.Instance != null)
+        {
+            AudioDirector.Instance.PlayPlayerHurt();
+        }
+
         if (controller != null)
         {
             controller.ApplyKnockback(knockback, 0.18f);
@@ -87,6 +104,11 @@ public class PlayerHealth : MonoBehaviour
 
         if (currentHealth <= 0)
         {
+            if (AudioDirector.Instance != null)
+            {
+                AudioDirector.Instance.PlayPlayerDeath();
+            }
+
             StartCoroutine(DieRoutine());
         }
 

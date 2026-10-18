@@ -7,6 +7,7 @@ public class HealthBarUI : MonoBehaviour
     [SerializeField] private Image fillImage;
     [SerializeField] private Image delayedFillImage;
     [SerializeField] private Image damageVignette;
+    [SerializeField] private Text valueText;
     [SerializeField] private float delayedFillSpeed = 0.55f;
     [SerializeField] private float vignetteFadeSpeed = 2.5f;
     [SerializeField] private float vignetteAlpha = 0.28f;
@@ -37,6 +38,11 @@ public class HealthBarUI : MonoBehaviour
         float fill = max > 0 ? Mathf.Clamp01((float)current / max) : 0f;
         bool lostHealth = fill < targetFill - 0.001f;
         targetFill = fill;
+
+        if (valueText != null)
+        {
+            valueText.text = $"{current}/{max}";
+        }
 
         if (fillImage != null)
         {

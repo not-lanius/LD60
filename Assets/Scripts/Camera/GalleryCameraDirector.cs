@@ -96,6 +96,22 @@ public class GalleryCameraDirector : MonoBehaviour
 
         currentState = state;
         SetCameraPriorities(state);
+
+        if (AudioDirector.Instance != null)
+        {
+            switch (state)
+            {
+                case GalleryCameraState.Room1:
+                    AudioDirector.Instance.PlayGalleryRoom1();
+                    break;
+                case GalleryCameraState.Room2:
+                    AudioDirector.Instance.PlayGalleryRoom2();
+                    break;
+                default:
+                    AudioDirector.Instance.StopGalleryAmbience();
+                    break;
+            }
+        }
     }
 
     private void SetCameraPriorities(GalleryCameraState state)

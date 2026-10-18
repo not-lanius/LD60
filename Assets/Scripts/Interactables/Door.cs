@@ -79,6 +79,11 @@ public class Door : MonoBehaviour
     {
         isOpening = true;
 
+        if (AudioDirector.Instance != null)
+        {
+            AudioDirector.Instance.PlayDoorOpen();
+        }
+
         int frameCount = frames != null ? frames.Length : 0;
         for (int i = 0; i < frameCount; i++)
         {

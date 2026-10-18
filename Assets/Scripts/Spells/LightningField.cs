@@ -43,6 +43,11 @@ public class LightningField : MonoBehaviour
             origin.y + size.y * 0.5f - bottomOffset);
         transform.position = center;
 
+        if (AudioDirector.Instance != null)
+        {
+            AudioDirector.Instance.PlayLightning();
+        }
+
         BuildVisuals();
         RefreshBolts();
         SetAlpha(1f);
@@ -97,6 +102,7 @@ public class LightningField : MonoBehaviour
             Vector2 point = hit.bounds.center;
             Vector2 direction = (point - center).sqrMagnitude > 0.0001f ? (point - center).normalized : Vector2.up;
             DamageApplier.Apply(target, damagePerTick, point, direction, DamageType.Spell);
+            PlayerMana.ReportCombatActivity();
         }
     }
 

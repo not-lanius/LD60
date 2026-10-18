@@ -78,6 +78,14 @@ public class PlayerController2D : MonoBehaviour
         spawnPoint = transform.position;
     }
 
+    private void OnDisable()
+    {
+        if (AudioDirector.Instance != null)
+        {
+            AudioDirector.Instance.PlayFootsteps(false);
+        }
+    }
+
     private void Update()
     {
         moveInput = Input.GetAxisRaw("Horizontal");
@@ -141,6 +149,15 @@ public class PlayerController2D : MonoBehaviour
                 isClimbing ? 0f : Mathf.Abs(body.velocity.x),
                 isClimbing || IsGrounded,
                 isDodging);
+        }
+
+        if (AudioDirector.Instance != null)
+        {
+            bool walking = IsGrounded
+                && !isClimbing
+                && !isDodging
+                && Mathf.Abs(body.velocity.x) > 0.4f;
+            AudioDirector.Instance.PlayFootsteps(walking);
         }
     }
 
@@ -262,6 +279,7 @@ public class PlayerController2D : MonoBehaviour
 
     private void StartDodge()
     {
+        AudioDirector.Instance?.PlayDodge();
         isDodging = true;
         dodgeTimer = dodgeDuration;
         dodgeCooldownTimer = dodgeDuration + dodgeCooldown;
@@ -481,6 +499,11 @@ public class PlayerController2D : MonoBehaviour
         ladderGrabCooldownTimer = ladderGrabCooldown;
         body.gravityScale = gravityScale;
         body.velocity = impulse;
+    }
+
+    public void SetSpawnPoint(Vector2 point)
+    {
+        spawnPoint = point;
     }
 
     public void RespawnAtSpawnPoint()

@@ -291,9 +291,15 @@ public class AerialDrone : MonoBehaviour, IDamageable
 
     private void BeginHoverCharge()
     {
+        PlayerMana.ReportCombatActivity();
         StopMovement();
         ChangeState(State.HoverCharge);
         stateTimer = windupDuration;
+
+        if (AudioDirector.Instance != null)
+        {
+            AudioDirector.Instance.PlayEnemyWindup();
+        }
     }
 
     private void BeginAttack()
@@ -371,6 +377,12 @@ public class AerialDrone : MonoBehaviour, IDamageable
         health = Mathf.Max(0f, health - amount);
         flashTimer = flashDuration;
         UpdateHealthBar();
+
+        if (AudioDirector.Instance != null)
+        {
+            AudioDirector.Instance.PlayEnemyHurt();
+        }
+
         ImpactFx.Spawn(hitPoint, new Color(1f, 0.55f, 0.25f, 0.95f), 0.6f);
 
         if (state == State.Sleep && CanSeeTarget())

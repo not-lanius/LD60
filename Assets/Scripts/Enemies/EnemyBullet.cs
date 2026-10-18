@@ -28,6 +28,7 @@ public class EnemyBullet : MonoBehaviour
 
     public void Launch(Vector2 launchDirection)
     {
+        PlayerMana.ReportCombatActivity();
         direction = launchDirection.sqrMagnitude > 0.0001f ? launchDirection.normalized : Vector2.right;
         transform.right = direction;
 

@@ -70,9 +70,19 @@ public class PlayerMelee : MonoBehaviour
     {
         cooldownTimer = cooldown;
 
+        if (mana != null)
+        {
+            mana.NotifyCombatActivity();
+        }
+
         if (swordVisual != null)
         {
             swordVisual.PlaySwing();
+        }
+
+        if (AudioDirector.Instance != null)
+        {
+            AudioDirector.Instance.PlayMelee();
         }
 
         int facing = controller != null ? controller.Facing : 1;

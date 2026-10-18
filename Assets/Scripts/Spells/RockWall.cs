@@ -39,6 +39,14 @@ public class RockWall : MonoBehaviour, IDamageable
         }
     }
 
+    private void Start()
+    {
+        if (AudioDirector.Instance != null)
+        {
+            AudioDirector.Instance.PlayRockRise();
+        }
+    }
+
     public void TakeDamage(float amount, Vector2 hitPoint, Vector2 hitDirection)
     {
         if (isBreaking || amount <= 0f)
@@ -46,6 +54,7 @@ public class RockWall : MonoBehaviour, IDamageable
             return;
         }
 
+        PlayerMana.ReportCombatActivity();
         health -= amount;
         flashTimer = flashDuration;
 
@@ -93,6 +102,12 @@ public class RockWall : MonoBehaviour, IDamageable
         }
 
         isBreaking = true;
+
+        if (AudioDirector.Instance != null)
+        {
+            AudioDirector.Instance.PlayRockExplosion();
+        }
+
         Explode();
         Destroy(gameObject);
     }
@@ -125,6 +140,7 @@ public class RockWall : MonoBehaviour, IDamageable
 
             Vector2 direction = ((Vector2)hit.bounds.center - center).normalized;
             DamageApplier.Apply(target, explosionDamage, hit.bounds.center, direction, DamageType.Spell);
+            PlayerMana.ReportCombatActivity();
         }
     }
 }
