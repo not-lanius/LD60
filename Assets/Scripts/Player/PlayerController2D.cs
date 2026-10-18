@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -25,6 +26,12 @@ public class PlayerController2D : MonoBehaviour
     [SerializeField] private float dodgeCooldown = 0.5f;
     [SerializeField] private bool canAirDodge = true;
 
+    [Header("Ladder")]
+    [SerializeField] private float climbSpeed = 5f;
+    [SerializeField] private float ladderHorizontalSpeed = 3.5f;
+    [SerializeField] private float ladderJumpVelocity = 14f;
+    [SerializeField] private float ladderGrabCooldown = 0.25f;
+
     [Header("Ground Check")]
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private float groundCheckDistance = 0.08f;
@@ -38,20 +45,27 @@ public class PlayerController2D : MonoBehaviour
     private Rigidbody2D body;
     private Collider2D bodyCollider;
 
+    private readonly List<Ladder> nearbyLadders = new List<Ladder>();
+
     private float moveInput;
+    private float climbInput;
     private float coyoteTimer;
     private float jumpBufferTimer;
     private float dodgeTimer;
     private float dodgeCooldownTimer;
     private float dodgeDirection;
     private float knockbackTimer;
+    private float ladderGrabCooldownTimer;
     private int facing = 1;
     private bool wasGrounded;
     private bool isDodging;
+    private bool isClimbing;
     private Vector2 spawnPoint;
+    private Ladder activeLadder;
 
     public bool IsGrounded { get; private set; }
     public bool IsDodging => isDodging;
+    public bool IsClimbing => isClimbing;
     public bool IsKnockedBack => knockbackTimer > 0f;
     public Vector2 Velocity => body != null ? body.velocity : Vector2.zero;
     public Vector2 SpawnPoint => spawnPoint;
@@ -68,17 +82,37 @@ public class PlayerController2D : MonoBehaviour
     private void Update()
     {
         moveInput = Input.GetAxisRaw("Horizontal");
+        climbInput = Input.GetAxisRaw("Vertical");
+
         if (moveInput != 0f)
         {
             facing = moveInput > 0f ? 1 : -1;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+        Ladder ladder = FindClosestLadder();
+        TryStartClimbing(ladder);
+
+        bool jumpPressed = Input.GetKeyDown(KeyCode.Space);
+        bool upPressed = Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow);
+
+        if (jumpPressed)
+        {
+            if (isClimbing)
+            {
+                JumpOffLadder();
+            }
+            else
+            {
+                jumpBufferTimer = jumpBufferTime;
+            }
+        }
+        else if (upPressed && !isClimbing && ladder == null)
         {
             jumpBufferTimer = jumpBufferTime;
         }
 
-        if (Input.GetKeyUp(KeyCode.Space) || Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.UpArrow))
+        if ((Input.GetKeyUp(KeyCode.Space) || Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.UpArrow))
+            && !isClimbing)
         {
             if (body.velocity.y > 0f && !isDodging)
             {
@@ -90,6 +124,7 @@ public class PlayerController2D : MonoBehaviour
             && dodgeCooldownTimer <= 0f
             && knockbackTimer <= 0f
             && !isDodging
+            && !isClimbing
             && (IsGrounded || canAirDodge))
         {
             StartDodge();
@@ -103,7 +138,10 @@ public class PlayerController2D : MonoBehaviour
         if (visual != null)
         {
             visual.SetFacing(facing);
-            visual.SetMotion(Mathf.Abs(body.velocity.x), IsGrounded, isDodging);
+            visual.SetMotion(
+                isClimbing ? 0f : Mathf.Abs(body.velocity.x),
+                isClimbing || IsGrounded,
+                isDodging);
         }
     }
 
@@ -114,6 +152,7 @@ public class PlayerController2D : MonoBehaviour
         jumpBufferTimer = Mathf.Max(0f, jumpBufferTimer - dt);
         dodgeCooldownTimer = Mathf.Max(0f, dodgeCooldownTimer - dt);
         knockbackTimer = Mathf.Max(0f, knockbackTimer - dt);
+        ladderGrabCooldownTimer = Mathf.Max(0f, ladderGrabCooldownTimer - dt);
 
         UpdateGrounded();
 
@@ -124,6 +163,20 @@ public class PlayerController2D : MonoBehaviour
         else
         {
             coyoteTimer = Mathf.Max(0f, coyoteTimer - dt);
+        }
+
+        if (isClimbing)
+        {
+            if (activeLadder == null || !activeLadder.HasPlayer(this))
+            {
+                StopClimbing();
+            }
+            else
+            {
+                ClimbMovement(dt);
+                NotifyLanding();
+                return;
+            }
         }
 
         if (isDodging)
@@ -237,22 +290,163 @@ public class PlayerController2D : MonoBehaviour
         wasGrounded = IsGrounded;
     }
 
+    public void RegisterLadder(Ladder ladder)
+    {
+        if (ladder != null && !nearbyLadders.Contains(ladder))
+        {
+            nearbyLadders.Add(ladder);
+        }
+    }
+
+    public void UnregisterLadder(Ladder ladder)
+    {
+        nearbyLadders.Remove(ladder);
+
+        if (activeLadder == ladder)
+        {
+            StopClimbing();
+        }
+    }
+
+    private Ladder FindClosestLadder()
+    {
+        Ladder closest = null;
+        float closestDistance = float.MaxValue;
+
+        for (int i = nearbyLadders.Count - 1; i >= 0; i--)
+        {
+            Ladder ladder = nearbyLadders[i];
+            if (ladder == null)
+            {
+                nearbyLadders.RemoveAt(i);
+                continue;
+            }
+
+            if (!ladder.HasPlayer(this))
+            {
+                continue;
+            }
+
+            float distance = Mathf.Abs(ladder.CenterX - transform.position.x);
+            if (distance < closestDistance)
+            {
+                closestDistance = distance;
+                closest = ladder;
+            }
+        }
+
+        return closest;
+    }
+
+    private void TryStartClimbing(Ladder ladder)
+    {
+        if (ladder == null || isClimbing || isDodging || knockbackTimer > 0f || ladderGrabCooldownTimer > 0f)
+        {
+            return;
+        }
+
+        float feetY = bodyCollider.bounds.min.y;
+        bool wantsUp = climbInput > 0.1f && feetY < ladder.Top - 0.65f;
+        bool wantsDown = climbInput < -0.1f && !IsGrounded && feetY > ladder.Bottom + 0.4f;
+
+        if (wantsUp || wantsDown)
+        {
+            StartClimbing(ladder);
+        }
+    }
+
+    private void StartClimbing(Ladder ladder)
+    {
+        isClimbing = true;
+        activeLadder = ladder;
+        isDodging = false;
+        jumpBufferTimer = 0f;
+        coyoteTimer = 0f;
+        body.gravityScale = 0f;
+        body.velocity = Vector2.zero;
+    }
+
+    private void ClimbMovement(float dt)
+    {
+        if (activeLadder == null)
+        {
+            return;
+        }
+
+        body.gravityScale = 0f;
+        body.velocity = new Vector2(moveInput * ladderHorizontalSpeed, climbInput * climbSpeed);
+
+        Bounds climbBounds = activeLadder.ClimbBounds;
+        float minY = climbBounds.min.y + 0.05f;
+        float maxY = climbBounds.max.y - 0.05f;
+
+        if (body.position.y <= minY)
+        {
+            body.velocity = new Vector2(body.velocity.x, Mathf.Max(0f, body.velocity.y));
+        }
+
+        if (body.position.y >= maxY)
+        {
+            body.velocity = new Vector2(body.velocity.x, Mathf.Min(0f, body.velocity.y));
+        }
+
+        float feetY = bodyCollider.bounds.min.y;
+        if (climbInput < -0.1f && IsGrounded && feetY <= activeLadder.Bottom + 0.45f)
+        {
+            StopClimbing();
+        }
+    }
+
+    private void JumpOffLadder()
+    {
+        if (!isClimbing)
+        {
+            return;
+        }
+
+        StopClimbing();
+        ladderGrabCooldownTimer = ladderGrabCooldown;
+        body.velocity = new Vector2(moveInput * moveSpeed, ladderJumpVelocity);
+        if (visual != null)
+        {
+            visual.Jump();
+        }
+    }
+
+    private void StopClimbing()
+    {
+        if (!isClimbing)
+        {
+            activeLadder = null;
+            return;
+        }
+
+        isClimbing = false;
+        activeLadder = null;
+        body.gravityScale = gravityScale;
+        body.velocity = new Vector2(body.velocity.x, 0f);
+    }
+
     public void ApplyKnockback(Vector2 impulse, float lockDuration)
     {
+        StopClimbing();
         isDodging = false;
         knockbackTimer = Mathf.Max(knockbackTimer, lockDuration);
         jumpBufferTimer = 0f;
         coyoteTimer = 0f;
+        ladderGrabCooldownTimer = ladderGrabCooldown;
         body.gravityScale = gravityScale;
         body.velocity = impulse;
     }
 
     public void RespawnAtSpawnPoint()
     {
+        StopClimbing();
         isDodging = false;
         dodgeCooldownTimer = 0f;
         dodgeTimer = 0f;
         knockbackTimer = 0f;
+        ladderGrabCooldownTimer = 0f;
         body.velocity = Vector2.zero;
         body.gravityScale = gravityScale;
         transform.position = spawnPoint;

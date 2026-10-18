@@ -7,9 +7,10 @@ public class CameraFollow2D : MonoBehaviour
     [SerializeField] private Vector2 offset = new Vector2(0f, 1.5f);
     [SerializeField] private float smoothTime = 0.16f;
     [SerializeField] private Vector2 lookAhead = new Vector2(1.6f, 0.8f);
+    [SerializeField] private float verticalDeadZone;
     [SerializeField] private bool clampToBounds = true;
-    [SerializeField] private Vector2 boundsMin = new Vector2(-10.5f, 2.2f);
-    [SerializeField] private Vector2 boundsMax = new Vector2(10.5f, 5f);
+    [SerializeField] private Vector2 boundsMin = new Vector2(-10.5f, -3f);
+    [SerializeField] private Vector2 boundsMax = new Vector2(10.5f, 8f);
 
     private Rigidbody2D targetBody;
     private Vector3 smoothVelocity;
@@ -34,8 +35,27 @@ public class CameraFollow2D : MonoBehaviour
             Mathf.Clamp(velocity.x * 0.16f, -lookAhead.x, lookAhead.x),
             Mathf.Clamp(velocity.y * 0.08f, -lookAhead.y, lookAhead.y));
 
-        Vector3 desired = target.position + (Vector3)(offset + targetLookAhead);
-        desired.z = transform.position.z;
+        Vector2 anchor = (Vector2)target.position + offset + targetLookAhead;
+        float desiredY = anchor.y;
+
+        if (verticalDeadZone > 0f)
+        {
+            float verticalDelta = anchor.y - transform.position.y;
+            if (verticalDelta > verticalDeadZone)
+            {
+                desiredY = anchor.y - verticalDeadZone;
+            }
+            else if (verticalDelta < -verticalDeadZone)
+            {
+                desiredY = anchor.y + verticalDeadZone;
+            }
+            else
+            {
+                desiredY = transform.position.y;
+            }
+        }
+
+        Vector3 desired = new Vector3(anchor.x, desiredY, transform.position.z);
 
         if (clampToBounds)
         {
