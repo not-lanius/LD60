@@ -60,6 +60,7 @@ public class PlayerController2D : MonoBehaviour
     private bool suppressLadderGrab;
     private Vector2 spawnPoint;
     private Ladder activeLadder;
+    private Bounds activeLadderBounds;
 
     public bool IsGrounded { get; private set; }
     public bool IsDodging => isDodging;
@@ -87,13 +88,13 @@ public class PlayerController2D : MonoBehaviour
             facing = moveInput > 0f ? 1 : -1;
         }
 
-        Ladder ladder = FindClosestLadder();
+        Ladder ladder = FindClosestLadder(out Bounds ladderBounds);
         if (ladder == null)
         {
             suppressLadderGrab = false;
         }
 
-        TryStartClimbing(ladder);
+        TryStartClimbing(ladder, ladderBounds);
 
         bool jumpPressed = Input.GetKeyDown(KeyCode.Space);
         bool upPressed = Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow);
@@ -308,10 +309,12 @@ public class PlayerController2D : MonoBehaviour
         }
     }
 
-    private Ladder FindClosestLadder()
+    private Ladder FindClosestLadder(out Bounds ladderBounds)
     {
         Ladder closest = null;
+        ladderBounds = default;
         float closestDistance = float.MaxValue;
+        Bounds playerBounds = bodyCollider.bounds;
 
         for (int i = nearbyLadders.Count - 1; i >= 0; i--)
         {
@@ -327,18 +330,24 @@ public class PlayerController2D : MonoBehaviour
                 continue;
             }
 
-            float distance = Mathf.Abs(ladder.CenterX - transform.position.x);
+            if (!ladder.TryGetClimbBounds(playerBounds, out Bounds segmentBounds))
+            {
+                continue;
+            }
+
+            float distance = Mathf.Abs(segmentBounds.center.x - playerBounds.center.x);
             if (distance < closestDistance)
             {
                 closestDistance = distance;
                 closest = ladder;
+                ladderBounds = segmentBounds;
             }
         }
 
         return closest;
     }
 
-    private void TryStartClimbing(Ladder ladder)
+    private void TryStartClimbing(Ladder ladder, Bounds ladderBounds)
     {
         if (ladder == null || isClimbing || isDodging || knockbackTimer > 0f
             || ladderGrabCooldownTimer > 0f || suppressLadderGrab)
@@ -348,30 +357,38 @@ public class PlayerController2D : MonoBehaviour
 
         Bounds bounds = bodyCollider.bounds;
         float feetY = bounds.min.y;
-        bool centerInsideLadder = bounds.center.y > ladder.Bottom + 0.05f
-            && bounds.center.y < ladder.Top - 0.05f;
+        bool centerInsideLadder = Contains2D(ladderBounds, bounds.center);
 
         if (!IsGrounded)
         {
             if (centerInsideLadder)
             {
-                StartClimbing(ladder);
+                StartClimbing(ladder, ladderBounds);
             }
 
             return;
         }
 
-        bool wantsUp = climbInput > 0.1f && feetY < ladder.Top - 0.65f;
+        bool wantsUp = climbInput > 0.1f && feetY < ladderBounds.max.y - 0.65f;
         if (wantsUp && centerInsideLadder)
         {
-            StartClimbing(ladder);
+            StartClimbing(ladder, ladderBounds);
         }
     }
 
-    private void StartClimbing(Ladder ladder)
+    private static bool Contains2D(Bounds bounds, Vector2 point)
+    {
+        return point.x >= bounds.min.x
+            && point.x <= bounds.max.x
+            && point.y >= bounds.min.y
+            && point.y <= bounds.max.y;
+    }
+
+    private void StartClimbing(Ladder ladder, Bounds ladderBounds)
     {
         isClimbing = true;
         activeLadder = ladder;
+        activeLadderBounds = ladderBounds;
         isDodging = false;
         jumpBufferTimer = 0f;
         coyoteTimer = 0f;
@@ -387,11 +404,21 @@ public class PlayerController2D : MonoBehaviour
         }
 
         body.gravityScale = 0f;
-        body.velocity = new Vector2(moveInput * ladderHorizontalSpeed, climbInput * climbSpeed);
 
-        Bounds climbBounds = activeLadder.ClimbBounds;
+        Bounds climbBounds = activeLadderBounds;
         float minY = climbBounds.min.y + 0.05f;
         float maxY = climbBounds.max.y - 0.05f;
+        float minX = climbBounds.min.x + 0.05f;
+        float maxX = climbBounds.max.x - 0.05f;
+        float horizontalVelocity = moveInput * ladderHorizontalSpeed;
+
+        if ((body.position.x <= minX && horizontalVelocity < 0f)
+            || (body.position.x >= maxX && horizontalVelocity > 0f))
+        {
+            horizontalVelocity = 0f;
+        }
+
+        body.velocity = new Vector2(horizontalVelocity, climbInput * climbSpeed);
 
         if (body.position.y <= minY)
         {
@@ -404,7 +431,7 @@ public class PlayerController2D : MonoBehaviour
         }
 
         float feetY = bodyCollider.bounds.min.y;
-        if (climbInput < -0.1f && IsGrounded && feetY <= activeLadder.Bottom + 0.45f)
+        if (climbInput < -0.1f && IsGrounded && feetY <= climbBounds.min.y + 0.45f)
         {
             StopClimbing();
         }
@@ -432,11 +459,13 @@ public class PlayerController2D : MonoBehaviour
         if (!isClimbing)
         {
             activeLadder = null;
+            activeLadderBounds = default;
             return;
         }
 
         isClimbing = false;
         activeLadder = null;
+        activeLadderBounds = default;
         body.gravityScale = gravityScale;
         body.velocity = new Vector2(body.velocity.x, 0f);
     }
