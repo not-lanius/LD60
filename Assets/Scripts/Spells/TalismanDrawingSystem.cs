@@ -545,7 +545,7 @@ public class TalismanDrawingSystem : MonoBehaviour
         Collider2D body = player.GetComponent<Collider2D>();
 
         float x = player.position.x + facing * wallSpawnDistance;
-        float feetY = body != null ? body.bounds.min.y : player.position.y - 0.6f;
+        float feetY = body != null ? body.bounds.min.y : player.position.y - 0.9f;
 
         RaycastHit2D hit = Physics2D.Raycast(new Vector2(x, player.position.y + 2.5f), Vector2.down, 8f, wallGroundMask);
         float groundY = hit.collider != null ? hit.point.y : feetY;
@@ -565,7 +565,7 @@ public class TalismanDrawingSystem : MonoBehaviour
         PlayerController2D controller = player.GetComponent<PlayerController2D>();
         int facing = controller != null ? controller.Facing : 1;
         Collider2D body = player.GetComponent<Collider2D>();
-        float feetY = body != null ? body.bounds.min.y : player.position.y - 0.6f;
+        float feetY = body != null ? body.bounds.min.y : player.position.y - 0.9f;
 
         GameObject fieldObject = Instantiate(lightningPrefab, Vector3.zero, Quaternion.identity);
         LightningField field = fieldObject.GetComponent<LightningField>();

@@ -14,6 +14,9 @@ public class PlayerMelee : MonoBehaviour
     [Header("Mana")]
     [SerializeField] private int manaPerHit = 12;
 
+    [Header("References")]
+    [SerializeField] private PlayerSwordVisual swordVisual;
+
     [Header("Visuals")]
     [SerializeField] private Color slashColor = new Color(1f, 0.95f, 0.7f, 0.95f);
     [SerializeField] private float slashRadius = 1.15f;
@@ -34,6 +37,11 @@ public class PlayerMelee : MonoBehaviour
         health = GetComponent<PlayerHealth>();
         mana = GetComponent<PlayerMana>();
         body = GetComponent<Collider2D>();
+
+        if (swordVisual == null)
+        {
+            swordVisual = GetComponentInChildren<PlayerSwordVisual>();
+        }
     }
 
     private void Update()
@@ -61,6 +69,11 @@ public class PlayerMelee : MonoBehaviour
     private void Attack()
     {
         cooldownTimer = cooldown;
+
+        if (swordVisual != null)
+        {
+            swordVisual.PlaySwing();
+        }
 
         int facing = controller != null ? controller.Facing : 1;
         Vector2 center = (Vector2)transform.position + new Vector2(facing * attackOffset, 0f);
@@ -105,8 +118,8 @@ public class PlayerMelee : MonoBehaviour
         LineRenderer line = slashObject.AddComponent<LineRenderer>();
         line.useWorldSpace = true;
         line.positionCount = Mathf.Max(2, slashSegments);
-        line.startWidth = 0.12f;
-        line.endWidth = 0.02f;
+        line.startWidth = 0.18f;
+        line.endWidth = 0.03f;
         line.numCapVertices = 2;
         line.material = GetSlashMaterial();
         line.sortingOrder = 27;
