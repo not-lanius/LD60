@@ -3,7 +3,7 @@ guid: 0afeb8577b003fb4589464f46d5b4b88
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 13
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -20,11 +20,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMasterTextureLimit: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -63,6 +64,8 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -74,6 +77,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -86,6 +90,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -98,6 +103,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -110,6 +116,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -122,6 +129,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -1461,73 +1469,72 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      TX Dungeon Props Animation - Chest 02 - 6: -727915181
-      TX Dungeon Props Animation - Chest 01 - 5: 1093551901
-      TX Dungeon Props Animation - Door Iron 01 - 6: -1623320021
-      TX Dungeon Props Animation - Door Wood Side 01 - 2: 2036070942
-      TX Dungeon Props Animation - Switch 01 - 3: -2022571955
-      TX Dungeon Props Animation - Switch 01 - 1: -2059871548
-      TX Dungeon Props Animation - Trapdoor 01 - 4: -1574377788
-      TX Dungeon Props Animation - Door Wood Side 01 - 6: -1605236218
-      TX Dungeon Props Animation - Door Iron 01 - 5: 1421121094
-      TX Dungeon Props Animation - Trapdoor 01 - 5: -390514156
-      TX Dungeon Props Animation - Chest 02 - 5: -1051559995
-      TX Dungeon Props Animation - Door Iron Side 01 - 6: -431880276
-      TX Dungeon Props Animation_6: -1664832154
-      TX Dungeon Props Animation - Door Wood 01 - 5: 1814095117
-      TX Dungeon Props Animation - Trapdoor 01 - 1: -1597807783
-      TX Dungeon Props Animation - Trapdoor 02 - 6: -31383608
-      TX Dungeon Props Animation - Trapdoor 02 - 1: -230533974
-      TX Dungeon Props Animation - Door Wood 01 - 4: -54289750
-      TX Dungeon Props Animation - Switch 01 - 0: 1446294333
-      TX Dungeon Props Animation - Switch 01 - 5: 1151055834
-      TX Dungeon Props Animation - Trapdoor 02 - 5: -1531248236
-      TX Dungeon Props Animation - Door Wood Side 01 - 1: 1873442280
-      TX Dungeon Props Animation - Door Wood 01 - 0: -2145196789
-      TX Dungeon Props Animation - Switch 01 - 2: 1647122173
-      TX Dungeon Props Animation - Chest 02 - 3: 694568488
-      TX Dungeon Props Animation - Door Iron Side 01 - 1: -1264384279
-      TX Dungeon Props Animation - Chest 01 - 2: 275176229
-      TX Dungeon Props Animation - Trapdoor 01 - 2: -2082458516
-      TX Dungeon Props Animation - Door Wood 01 - 3: 779230709
-      TX Dungeon Props Animation - Door Iron Side 01 - 3: -395101672
-      TX Dungeon Props Animation - Door Iron Side 01 - 5: -1524824121
-      TX Dungeon Props Animation - Chest 02 - 0: -1145960990
-      TX Dungeon Props Animation - Chest 01 - 6: -1888499614
-      TX Dungeon Props Animation - Trapdoor 01 - 0: -505832463
-      TX Dungeon Props Animation - Door Iron 01 - 1: -1737990144
-      TX Dungeon Props Animation - Chest 01 - 1: -222941473
-      TX Dungeon Props Animation - Switch 01 - 6: -1141442345
-      TX Dungeon Props Animation - Trapdoor 02 - 4: 1305619608
-      TX Dungeon Props Animation - Door Wood Side 01 - 0: 140802263
-      TX Dungeon Props Animation - Door Iron 01 - 3: -1985541942
-      TX Dungeon Props Animation - Trapdoor 01 - 6: 94639152
-      TX Dungeon Props Animation - Door Iron Side 01 - 4: 557267521
-      TX Dungeon Props Animation - Trapdoor 02 - 0: 1109957155
-      TX Dungeon Props Animation - Door Wood 01 - 6: 137215894
-      TX Dungeon Props Animation - Switch 01 - 4: -670504851
-      TX Dungeon Props Animation - Door Wood Side 01 - 3: 1847660436
-      TX Dungeon Props Animation - Door Iron 01 - 2: 106033873
       TX Dungeon Props Animation - Chest 01 - 0: 1499428555
-      TX Dungeon Props Animation - Trapdoor 01 - 3: 465860779
-      TX Dungeon Props Animation - Door Iron 01 - 4: -403517661
+      TX Dungeon Props Animation - Chest 01 - 1: -222941473
+      TX Dungeon Props Animation - Chest 01 - 2: 275176229
       TX Dungeon Props Animation - Chest 01 - 3: -831333178
-      TX Dungeon Props Animation - Door Iron Side 01 - 0: 1690681290
       TX Dungeon Props Animation - Chest 01 - 4: 1749885352
-      TX Dungeon Props Animation - Chest 02 - 4: -1231351813
-      TX Dungeon Props Animation - Door Wood Side 01 - 4: -437427861
-      TX Dungeon Props Animation - Door Wood 01 - 2: 32182503
-      TX Dungeon Props Animation - Trapdoor 02 - 3: -314410758
-      TX Dungeon Props Animation - Chest 02 - 2: -532819338
-      TX Dungeon Props Animation - Trapdoor 02 - 2: 225910462
-      TX Dungeon Props Animation - Door Wood Side 01 - 5: -1146652454
-      TX Dungeon Props Animation - Door Wood 01 - 1: -718838927
+      TX Dungeon Props Animation - Chest 01 - 5: 1093551901
+      TX Dungeon Props Animation - Chest 01 - 6: -1888499614
+      TX Dungeon Props Animation - Chest 02 - 0: -1145960990
       TX Dungeon Props Animation - Chest 02 - 1: -1697810175
+      TX Dungeon Props Animation - Chest 02 - 2: -532819338
+      TX Dungeon Props Animation - Chest 02 - 3: 694568488
+      TX Dungeon Props Animation - Chest 02 - 4: -1231351813
+      TX Dungeon Props Animation - Chest 02 - 5: -1051559995
+      TX Dungeon Props Animation - Chest 02 - 6: -727915181
       TX Dungeon Props Animation - Door Iron 01 - 0: 622991790
+      TX Dungeon Props Animation - Door Iron 01 - 1: -1737990144
+      TX Dungeon Props Animation - Door Iron 01 - 2: 106033873
+      TX Dungeon Props Animation - Door Iron 01 - 3: -1985541942
+      TX Dungeon Props Animation - Door Iron 01 - 4: -403517661
+      TX Dungeon Props Animation - Door Iron 01 - 5: 1421121094
+      TX Dungeon Props Animation - Door Iron 01 - 6: -1623320021
+      TX Dungeon Props Animation - Door Iron Side 01 - 0: 1690681290
+      TX Dungeon Props Animation - Door Iron Side 01 - 1: -1264384279
       TX Dungeon Props Animation - Door Iron Side 01 - 2: 66388715
-  spritePackingTag: 
+      TX Dungeon Props Animation - Door Iron Side 01 - 3: -395101672
+      TX Dungeon Props Animation - Door Iron Side 01 - 4: 557267521
+      TX Dungeon Props Animation - Door Iron Side 01 - 5: -1524824121
+      TX Dungeon Props Animation - Door Iron Side 01 - 6: -431880276
+      TX Dungeon Props Animation - Door Wood 01 - 0: -2145196789
+      TX Dungeon Props Animation - Door Wood 01 - 1: -718838927
+      TX Dungeon Props Animation - Door Wood 01 - 2: 32182503
+      TX Dungeon Props Animation - Door Wood 01 - 3: 779230709
+      TX Dungeon Props Animation - Door Wood 01 - 4: -54289750
+      TX Dungeon Props Animation - Door Wood 01 - 5: 1814095117
+      TX Dungeon Props Animation - Door Wood 01 - 6: 137215894
+      TX Dungeon Props Animation - Door Wood Side 01 - 0: 140802263
+      TX Dungeon Props Animation - Door Wood Side 01 - 1: 1873442280
+      TX Dungeon Props Animation - Door Wood Side 01 - 2: 2036070942
+      TX Dungeon Props Animation - Door Wood Side 01 - 3: 1847660436
+      TX Dungeon Props Animation - Door Wood Side 01 - 4: -437427861
+      TX Dungeon Props Animation - Door Wood Side 01 - 5: -1146652454
+      TX Dungeon Props Animation - Door Wood Side 01 - 6: -1605236218
+      TX Dungeon Props Animation - Switch 01 - 0: 1446294333
+      TX Dungeon Props Animation - Switch 01 - 1: -2059871548
+      TX Dungeon Props Animation - Switch 01 - 2: 1647122173
+      TX Dungeon Props Animation - Switch 01 - 3: -2022571955
+      TX Dungeon Props Animation - Switch 01 - 4: -670504851
+      TX Dungeon Props Animation - Switch 01 - 5: 1151055834
+      TX Dungeon Props Animation - Switch 01 - 6: -1141442345
+      TX Dungeon Props Animation - Trapdoor 01 - 0: -505832463
+      TX Dungeon Props Animation - Trapdoor 01 - 1: -1597807783
+      TX Dungeon Props Animation - Trapdoor 01 - 2: -2082458516
+      TX Dungeon Props Animation - Trapdoor 01 - 3: 465860779
+      TX Dungeon Props Animation - Trapdoor 01 - 4: -1574377788
+      TX Dungeon Props Animation - Trapdoor 01 - 5: -390514156
+      TX Dungeon Props Animation - Trapdoor 01 - 6: 94639152
+      TX Dungeon Props Animation - Trapdoor 02 - 0: 1109957155
+      TX Dungeon Props Animation - Trapdoor 02 - 1: -230533974
+      TX Dungeon Props Animation - Trapdoor 02 - 2: 225910462
+      TX Dungeon Props Animation - Trapdoor 02 - 3: -314410758
+      TX Dungeon Props Animation - Trapdoor 02 - 4: 1305619608
+      TX Dungeon Props Animation - Trapdoor 02 - 5: -1531248236
+      TX Dungeon Props Animation - Trapdoor 02 - 6: -31383608
+      TX Dungeon Props Animation_6: -1664832154
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
