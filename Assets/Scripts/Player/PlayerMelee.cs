@@ -86,7 +86,7 @@ public class PlayerMelee : MonoBehaviour
                 continue;
             }
 
-            target.TakeDamage(damage, hit.bounds.center, new Vector2(facing, 0f));
+            DamageApplier.Apply(target, damage, hit.bounds.center, new Vector2(facing, 0f), DamageType.Physical);
             ImpactFx.Spawn(hit.bounds.center, new Color(1f, 0.9f, 0.55f, 0.95f), 0.8f);
             hitCount++;
         }

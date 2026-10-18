@@ -96,7 +96,7 @@ public class LightningField : MonoBehaviour
 
             Vector2 point = hit.bounds.center;
             Vector2 direction = (point - center).sqrMagnitude > 0.0001f ? (point - center).normalized : Vector2.up;
-            target.TakeDamage(damagePerTick, point, direction);
+            DamageApplier.Apply(target, damagePerTick, point, direction, DamageType.Spell);
         }
     }
 

@@ -124,7 +124,7 @@ public class RockWall : MonoBehaviour, IDamageable
             }
 
             Vector2 direction = ((Vector2)hit.bounds.center - center).normalized;
-            target.TakeDamage(explosionDamage, hit.bounds.center, direction);
+            DamageApplier.Apply(target, explosionDamage, hit.bounds.center, direction, DamageType.Spell);
         }
     }
 }

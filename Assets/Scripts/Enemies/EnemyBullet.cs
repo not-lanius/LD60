@@ -18,6 +18,14 @@ public class EnemyBullet : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
     }
 
+    public void Configure(float launchSpeed, int hitDamage, float hitKnockback, float maxDistance)
+    {
+        speed = Mathf.Max(0.1f, launchSpeed);
+        damage = Mathf.Max(1, hitDamage);
+        knockback = Mathf.Max(0f, hitKnockback);
+        lifetime = Mathf.Max(0.1f, maxDistance / speed);
+    }
+
     public void Launch(Vector2 launchDirection)
     {
         direction = launchDirection.sqrMagnitude > 0.0001f ? launchDirection.normalized : Vector2.right;
@@ -53,6 +61,14 @@ public class EnemyBullet : MonoBehaviour
         {
             player.TakeDamage(damage, direction * knockback);
             ImpactFx.Spawn(transform.position, new Color(1f, 0.35f, 0.25f, 0.95f), 0.7f);
+            Destroy(gameObject);
+            return;
+        }
+
+        if (other.GetComponentInParent<ShieldSoldier>() != null
+            || other.GetComponentInParent<RangedSoldier>() != null)
+        {
+            ImpactFx.Spawn(transform.position, new Color(0.7f, 0.82f, 1f, 0.9f), 0.6f);
             Destroy(gameObject);
             return;
         }

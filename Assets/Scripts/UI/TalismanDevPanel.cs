@@ -10,7 +10,11 @@ public class TalismanDevPanel : MonoBehaviour
     {
         if (drawing != null && dataText != null)
         {
-            dataText.text = drawing.GetDebugText() + "\n" + DummyTarget.DescribeLatest();
+            dataText.text = drawing.GetDebugText()
+                + "\n" + DummyTarget.DescribeLatest()
+                + "\n" + ShieldSoldier.DescribeLatest()
+                + "\n" + RangedSoldier.DescribeLatest()
+                + "\n" + AerialDrone.DescribeLatest();
         }
     }
 }

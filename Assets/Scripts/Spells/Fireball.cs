@@ -58,7 +58,7 @@ public class Fireball : MonoBehaviour
         IDamageable damageable = other.GetComponentInParent<IDamageable>();
         if (damageable != null)
         {
-            damageable.TakeDamage(damage, transform.position, transform.right);
+            DamageApplier.Apply(damageable, damage, transform.position, transform.right, DamageType.Spell);
             ImpactFx.Spawn(transform.position);
             Destroy(gameObject);
             return;
