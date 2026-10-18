@@ -60,6 +60,8 @@ public class RangedSoldier : MonoBehaviour, IDamageable
     [SerializeField] private float fallRecoveryDepth = 5f;
 
     [Header("Visuals")]
+    [SerializeField] private Sprite bodySprite;
+    [SerializeField] private float bodySpriteScale = 0.52f;
     [SerializeField] private SpriteRenderer bodyRenderer;
     [SerializeField] private Transform weaponRoot;
     [SerializeField] private Transform healthBarRoot;
@@ -411,7 +413,7 @@ public class RangedSoldier : MonoBehaviour, IDamageable
         RaycastHit2D[] hits = Physics2D.BoxCastAll(muzzle, castSize, 0f, direction, distance, sightMask);
         foreach (RaycastHit2D hit in hits)
         {
-            if (hit.collider == null || hit.collider.transform.IsChildOf(transform))
+            if (hit.collider == null || hit.collider.isTrigger || hit.collider.transform.IsChildOf(transform))
             {
                 continue;
             }
@@ -488,6 +490,11 @@ public class RangedSoldier : MonoBehaviour, IDamageable
             weaponRoot.localPosition = position;
             weaponRoot.localScale = new Vector3(Mathf.Abs(weaponRoot.localScale.x) * facing, weaponRoot.localScale.y, 1f);
         }
+
+        if (bodyRenderer != null)
+        {
+            bodyRenderer.flipX = facing > 0;
+        }
     }
 
     private bool GroundAhead(int direction)
@@ -516,7 +523,7 @@ public class RangedSoldier : MonoBehaviour, IDamageable
         RaycastHit2D[] hits = Physics2D.RaycastAll(origin, new Vector2(direction, 0f), wallCheckDistance, wallMask);
         foreach (RaycastHit2D hit in hits)
         {
-            if (hit.collider == null || hit.collider.transform.IsChildOf(transform))
+            if (hit.collider == null || hit.collider.isTrigger || hit.collider.transform.IsChildOf(transform))
             {
                 continue;
             }
@@ -713,7 +720,7 @@ public class RangedSoldier : MonoBehaviour, IDamageable
         Vector2 lineEnd = aimPoint;
         foreach (RaycastHit2D hit in hits)
         {
-            if (hit.collider == null || hit.collider.transform.IsChildOf(transform))
+            if (hit.collider == null || hit.collider.isTrigger || hit.collider.transform.IsChildOf(transform))
             {
                 continue;
             }
@@ -777,26 +784,37 @@ public class RangedSoldier : MonoBehaviour, IDamageable
             bodyBaseScale = bodyRenderer.transform.localScale;
             bodyParts = new[] { bodyRenderer };
             bodyPartColors = new[] { bodyBaseColor };
+            SetFacing(facing);
             return;
         }
 
-        bodyRenderer = CreatePart("Body", transform, new Vector3(0f, 1.02f, 0f), new Vector3(0.76f, 1.5f, 1f), new Color(0.25f, 0.34f, 0.24f, 1f), 14);
-        CreatePart("Head", transform, new Vector3(0f, 1.9f, 0f), new Vector3(0.44f, 0.44f, 1f), new Color(0.82f, 0.65f, 0.49f, 1f), 15);
-        CreatePart("Helmet", transform, new Vector3(0f, 2.1f, 0f), new Vector3(0.56f, 0.2f, 1f), new Color(0.12f, 0.18f, 0.12f, 1f), 16);
-        CreatePart("Visor", transform, new Vector3(facing * 0.1f, 1.92f, 0f), new Vector3(0.36f, 0.1f, 1f), new Color(0.05f, 0.08f, 0.05f, 1f), 17);
-        CreatePart("Vest", transform, new Vector3(0f, 1.12f, 0f), new Vector3(0.86f, 0.58f, 1f), new Color(0.16f, 0.22f, 0.15f, 1f), 16);
+        float barY = 2.55f;
 
-        GameObject weaponObject = new GameObject("Weapon");
-        weaponRoot = weaponObject.transform;
-        weaponRoot.SetParent(transform, false);
-        weaponRoot.localPosition = new Vector3(0.58f, 1.12f, 0f);
-        CreatePart("Rifle", weaponRoot, Vector3.zero, new Vector3(1.15f, 0.12f, 1f), new Color(0.1f, 0.11f, 0.1f, 1f), 18);
-        CreatePart("Muzzle", weaponRoot, new Vector3(0.58f, 0f, 0f), new Vector3(0.12f, 0.18f, 1f), new Color(0.35f, 0.32f, 0.22f, 1f), 19);
+        if (bodySprite != null)
+        {
+            bodyRenderer = CreatePart("Body", transform, new Vector3(0f, 1.02f, 0f), Vector3.one * bodySpriteScale, Color.white, 14, bodySprite);
+            barY = 1.02f + bodySprite.bounds.size.y * bodySpriteScale * 0.5f + 0.22f;
+        }
+        else
+        {
+            bodyRenderer = CreatePart("Body", transform, new Vector3(0f, 1.02f, 0f), new Vector3(0.76f, 1.5f, 1f), new Color(0.25f, 0.34f, 0.24f, 1f), 14);
+            CreatePart("Head", transform, new Vector3(0f, 1.9f, 0f), new Vector3(0.44f, 0.44f, 1f), new Color(0.82f, 0.65f, 0.49f, 1f), 15);
+            CreatePart("Helmet", transform, new Vector3(0f, 2.1f, 0f), new Vector3(0.56f, 0.2f, 1f), new Color(0.12f, 0.18f, 0.12f, 1f), 16);
+            CreatePart("Visor", transform, new Vector3(facing * 0.1f, 1.92f, 0f), new Vector3(0.36f, 0.1f, 1f), new Color(0.05f, 0.08f, 0.05f, 1f), 17);
+            CreatePart("Vest", transform, new Vector3(0f, 1.12f, 0f), new Vector3(0.86f, 0.58f, 1f), new Color(0.16f, 0.22f, 0.15f, 1f), 16);
+
+            GameObject weaponObject = new GameObject("Weapon");
+            weaponRoot = weaponObject.transform;
+            weaponRoot.SetParent(transform, false);
+            weaponRoot.localPosition = new Vector3(0.58f, 1.12f, 0f);
+            CreatePart("Rifle", weaponRoot, Vector3.zero, new Vector3(1.15f, 0.12f, 1f), new Color(0.1f, 0.11f, 0.1f, 1f), 18);
+            CreatePart("Muzzle", weaponRoot, new Vector3(0.58f, 0f, 0f), new Vector3(0.12f, 0.18f, 1f), new Color(0.35f, 0.32f, 0.22f, 1f), 19);
+        }
 
         GameObject barObject = new GameObject("HealthBar");
         healthBarRoot = barObject.transform;
         healthBarRoot.SetParent(transform, false);
-        healthBarRoot.localPosition = new Vector3(0f, 2.55f, 0f);
+        healthBarRoot.localPosition = new Vector3(0f, barY, 0f);
         CreatePart("Back", healthBarRoot, Vector3.zero, new Vector3(1.5f, 0.16f, 1f), new Color(0.08f, 0.08f, 0.09f, 0.9f), 30);
         SpriteRenderer fill = CreatePart("Fill", healthBarRoot, Vector3.zero, new Vector3(barWidth, 0.09f, 1f), new Color(0.86f, 0.22f, 0.18f, 1f), 31);
         healthBarFill = fill.transform;
@@ -835,7 +853,7 @@ public class RangedSoldier : MonoBehaviour, IDamageable
         SetFacing(facing);
     }
 
-    private static SpriteRenderer CreatePart(string partName, Transform parent, Vector3 localPosition, Vector3 localScale, Color color, int sortingOrder)
+    private static SpriteRenderer CreatePart(string partName, Transform parent, Vector3 localPosition, Vector3 localScale, Color color, int sortingOrder, Sprite sprite = null)
     {
         GameObject part = new GameObject(partName);
         part.transform.SetParent(parent, false);
@@ -843,7 +861,7 @@ public class RangedSoldier : MonoBehaviour, IDamageable
         part.transform.localScale = localScale;
 
         SpriteRenderer renderer = part.AddComponent<SpriteRenderer>();
-        renderer.sprite = GetWhiteSprite();
+        renderer.sprite = sprite != null ? sprite : GetWhiteSprite();
         renderer.color = color;
         renderer.sortingOrder = sortingOrder;
         return renderer;

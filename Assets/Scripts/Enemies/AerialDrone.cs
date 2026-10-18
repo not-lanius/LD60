@@ -41,6 +41,8 @@ public class AerialDrone : MonoBehaviour, IDamageable
     [SerializeField] private float maxHealth = 80f;
 
     [Header("Visuals")]
+    [SerializeField] private Sprite bodySprite;
+    [SerializeField] private float bodySpriteScale = 0.26f;
     [SerializeField] private SpriteRenderer bodyRenderer;
     [SerializeField] private Transform visualRoot;
     [SerializeField] private Transform rotorLeft;
@@ -568,32 +570,42 @@ public class AerialDrone : MonoBehaviour, IDamageable
         visualRoot.SetParent(transform, false);
         visualBasePosition = visualRoot.localPosition;
 
-        bodyRenderer = CreatePart("Body", visualRoot, Vector3.zero, new Vector3(0.9f, 0.56f, 1f), new Color(0.26f, 0.3f, 0.34f, 1f), 20);
-        CreatePart("TopPlate", visualRoot, new Vector3(0f, 0.2f, 0f), new Vector3(0.56f, 0.18f, 1f), new Color(0.17f, 0.2f, 0.23f, 1f), 21);
-        CreatePart("Eye", visualRoot, new Vector3(0f, 0f, 0f), new Vector3(0.22f, 0.16f, 1f), new Color(0.95f, 0.18f, 0.12f, 1f), 22);
+        float barY = 1.05f;
 
-        GameObject leftRotorObject = new GameObject("RotorLeft");
-        rotorLeft = leftRotorObject.transform;
-        rotorLeft.SetParent(visualRoot, false);
-        rotorLeft.localPosition = new Vector3(-0.65f, 0.12f, 0f);
-        CreatePart("LeftBlade", rotorLeft, Vector3.zero, new Vector3(0.62f, 0.06f, 1f), new Color(0.65f, 0.7f, 0.72f, 1f), 19);
+        if (bodySprite != null)
+        {
+            bodyRenderer = CreatePart("Body", visualRoot, Vector3.zero, Vector3.one * bodySpriteScale, Color.white, 20, bodySprite);
+            barY = bodySprite.bounds.size.y * bodySpriteScale * 0.5f + 0.18f;
+        }
+        else
+        {
+            bodyRenderer = CreatePart("Body", visualRoot, Vector3.zero, new Vector3(0.9f, 0.56f, 1f), new Color(0.26f, 0.3f, 0.34f, 1f), 20);
+            CreatePart("TopPlate", visualRoot, new Vector3(0f, 0.2f, 0f), new Vector3(0.56f, 0.18f, 1f), new Color(0.17f, 0.2f, 0.23f, 1f), 21);
+            CreatePart("Eye", visualRoot, new Vector3(0f, 0f, 0f), new Vector3(0.22f, 0.16f, 1f), new Color(0.95f, 0.18f, 0.12f, 1f), 22);
 
-        GameObject rightRotorObject = new GameObject("RotorRight");
-        rotorRight = rightRotorObject.transform;
-        rotorRight.SetParent(visualRoot, false);
-        rotorRight.localPosition = new Vector3(0.65f, 0.12f, 0f);
-        CreatePart("RightBlade", rotorRight, Vector3.zero, new Vector3(0.62f, 0.06f, 1f), new Color(0.65f, 0.7f, 0.72f, 1f), 19);
+            GameObject leftRotorObject = new GameObject("RotorLeft");
+            rotorLeft = leftRotorObject.transform;
+            rotorLeft.SetParent(visualRoot, false);
+            rotorLeft.localPosition = new Vector3(-0.65f, 0.12f, 0f);
+            CreatePart("LeftBlade", rotorLeft, Vector3.zero, new Vector3(0.62f, 0.06f, 1f), new Color(0.65f, 0.7f, 0.72f, 1f), 19);
 
-        GameObject bladesObject = new GameObject("MeleeBlades");
-        meleeBlades = bladesObject.transform;
-        meleeBlades.SetParent(visualRoot, false);
-        CreatePart("BladeHorizontal", meleeBlades, Vector3.zero, new Vector3(1.28f, 0.07f, 1f), new Color(0.82f, 0.88f, 0.9f, 1f), 23);
-        CreatePart("BladeVertical", meleeBlades, Vector3.zero, new Vector3(0.07f, 0.98f, 1f), new Color(0.82f, 0.88f, 0.9f, 1f), 23);
+            GameObject rightRotorObject = new GameObject("RotorRight");
+            rotorRight = rightRotorObject.transform;
+            rotorRight.SetParent(visualRoot, false);
+            rotorRight.localPosition = new Vector3(0.65f, 0.12f, 0f);
+            CreatePart("RightBlade", rotorRight, Vector3.zero, new Vector3(0.62f, 0.06f, 1f), new Color(0.65f, 0.7f, 0.72f, 1f), 19);
+
+            GameObject bladesObject = new GameObject("MeleeBlades");
+            meleeBlades = bladesObject.transform;
+            meleeBlades.SetParent(visualRoot, false);
+            CreatePart("BladeHorizontal", meleeBlades, Vector3.zero, new Vector3(1.28f, 0.07f, 1f), new Color(0.82f, 0.88f, 0.9f, 1f), 23);
+            CreatePart("BladeVertical", meleeBlades, Vector3.zero, new Vector3(0.07f, 0.98f, 1f), new Color(0.82f, 0.88f, 0.9f, 1f), 23);
+        }
 
         GameObject barObject = new GameObject("HealthBar");
         healthBarRoot = barObject.transform;
         healthBarRoot.SetParent(transform, false);
-        healthBarRoot.localPosition = new Vector3(0f, 1.05f, 0f);
+        healthBarRoot.localPosition = new Vector3(0f, barY, 0f);
         CreatePart("Back", healthBarRoot, Vector3.zero, new Vector3(1.5f, 0.16f, 1f), new Color(0.08f, 0.08f, 0.09f, 0.9f), 30);
         SpriteRenderer fill = CreatePart("Fill", healthBarRoot, Vector3.zero, new Vector3(barWidth, 0.09f, 1f), new Color(0.86f, 0.22f, 0.18f, 1f), 31);
         healthBarFill = fill.transform;
@@ -628,7 +640,7 @@ public class AerialDrone : MonoBehaviour, IDamageable
         bodyBaseColor = bodyRenderer.color;
     }
 
-    private static SpriteRenderer CreatePart(string partName, Transform parent, Vector3 localPosition, Vector3 localScale, Color color, int sortingOrder)
+    private static SpriteRenderer CreatePart(string partName, Transform parent, Vector3 localPosition, Vector3 localScale, Color color, int sortingOrder, Sprite sprite = null)
     {
         GameObject part = new GameObject(partName);
         part.transform.SetParent(parent, false);
@@ -636,7 +648,7 @@ public class AerialDrone : MonoBehaviour, IDamageable
         part.transform.localScale = localScale;
 
         SpriteRenderer renderer = part.AddComponent<SpriteRenderer>();
-        renderer.sprite = GetWhiteSprite();
+        renderer.sprite = sprite != null ? sprite : GetWhiteSprite();
         renderer.color = color;
         renderer.sortingOrder = sortingOrder;
         return renderer;

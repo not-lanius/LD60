@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -37,6 +38,12 @@ public class TalismanDrawingSystem : MonoBehaviour
     [Header("Debug")]
     [SerializeField] private bool enableDebugKeys = true;
 
+    [Header("Stamp")]
+    [SerializeField] private GameObject stampObject;
+    [SerializeField] private CanvasGroup stampCanvasGroup;
+    [SerializeField] private float stampDuration = 0.45f;
+    [SerializeField] private float stampStartScale = 1.35f;
+
     private Texture2D inkTexture;
     private Color32[] inkPixels;
     private int texWidth;
@@ -52,6 +59,7 @@ public class TalismanDrawingSystem : MonoBehaviour
     private int expectedStrokeCount;
     private string expectedCharacter = string.Empty;
     private float lastPrefixScore;
+    private Coroutine stampRoutine;
 
     public string LastCharacter { get; private set; } = string.Empty;
     public float LastNeatness { get; private set; }
@@ -205,6 +213,7 @@ public class TalismanDrawingSystem : MonoBehaviour
             return false;
         }
 
+        PlayStamp();
         RecognizeAndUpdate();
 
         if (string.IsNullOrEmpty(LastCharacter) || LastNeatness < acceptThreshold)
@@ -261,6 +270,52 @@ public class TalismanDrawingSystem : MonoBehaviour
 
         ClearTalisman(false);
         return true;
+    }
+
+    private void PlayStamp()
+    {
+        if (stampObject == null)
+        {
+            return;
+        }
+
+        if (stampRoutine != null)
+        {
+            StopCoroutine(stampRoutine);
+        }
+
+        stampRoutine = StartCoroutine(StampRoutine());
+    }
+
+    private IEnumerator StampRoutine()
+    {
+        stampObject.SetActive(true);
+        stampObject.transform.localScale = Vector3.one * stampStartScale;
+        if (stampCanvasGroup != null)
+        {
+            stampCanvasGroup.alpha = 1f;
+        }
+
+        float elapsed = 0f;
+        float duration = Mathf.Max(0.05f, stampDuration);
+        while (elapsed < duration)
+        {
+            elapsed += Time.unscaledDeltaTime;
+            float t = Mathf.Clamp01(elapsed / duration);
+            float scaleT = Mathf.Clamp01(t * 3f);
+            float alpha = t < 0.55f ? 1f : Mathf.Lerp(1f, 0f, (t - 0.55f) / 0.45f);
+
+            stampObject.transform.localScale = Vector3.one * Mathf.Lerp(stampStartScale, 1f, scaleT);
+            if (stampCanvasGroup != null)
+            {
+                stampCanvasGroup.alpha = alpha;
+            }
+
+            yield return null;
+        }
+
+        stampObject.SetActive(false);
+        stampRoutine = null;
     }
 
     private int GetManaCost(string character)

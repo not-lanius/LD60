@@ -61,6 +61,10 @@ public class ShieldSoldier : MonoBehaviour, IDamageable, ITypedDamageable
     [SerializeField] private float fallRecoveryDepth = 5f;
 
     [Header("Visuals")]
+    [SerializeField] private Sprite bodySprite;
+    [SerializeField] private float bodySpriteScale = 0.52f;
+    [SerializeField] private Sprite shieldSprite;
+    [SerializeField] private float shieldSpriteScale = 0.18f;
     [SerializeField] private SpriteRenderer bodyRenderer;
     [SerializeField] private Transform shieldRoot;
     [SerializeField] private SpriteRenderer shieldRenderer;
@@ -427,8 +431,8 @@ public class ShieldSoldier : MonoBehaviour, IDamageable, ITypedDamageable
         if (shieldRenderer != null)
         {
             shieldRenderer.color = raised
-                ? new Color(0.58f, 0.68f, 0.82f, 1f)
-                : new Color(0.38f, 0.45f, 0.56f, 1f);
+                ? (shieldSprite != null ? Color.white : new Color(0.58f, 0.68f, 0.82f, 1f))
+                : (shieldSprite != null ? new Color(0.75f, 0.75f, 0.75f, 1f) : new Color(0.38f, 0.45f, 0.56f, 1f));
         }
     }
 
@@ -500,6 +504,11 @@ public class ShieldSoldier : MonoBehaviour, IDamageable, ITypedDamageable
         {
             facing = direction > 0 ? 1 : -1;
         }
+
+        if (bodyRenderer != null)
+        {
+            bodyRenderer.flipX = facing > 0;
+        }
     }
 
     private bool GroundAhead(int direction)
@@ -530,6 +539,11 @@ public class ShieldSoldier : MonoBehaviour, IDamageable, ITypedDamageable
         foreach (RaycastHit2D hit in hits)
         {
             if (hit.collider == null)
+            {
+                continue;
+            }
+
+            if (hit.collider.isTrigger)
             {
                 continue;
             }
@@ -756,27 +770,45 @@ public class ShieldSoldier : MonoBehaviour, IDamageable, ITypedDamageable
             bodyBaseScale = bodyRenderer.transform.localScale;
             bodyParts = new[] { bodyRenderer };
             bodyPartColors = new[] { bodyBaseColor };
+            SetFacing(facing);
             return;
         }
 
-        bodyRenderer = CreatePart("Body", transform, new Vector3(0f, 1.02f, 0f), new Vector3(0.82f, 1.5f, 1f), new Color(0.27f, 0.36f, 0.49f, 1f), 14);
-        CreatePart("Head", transform, new Vector3(0f, 1.9f, 0f), new Vector3(0.46f, 0.44f, 1f), new Color(0.82f, 0.65f, 0.49f, 1f), 15);
-        CreatePart("Helmet", transform, new Vector3(0f, 2.1f, 0f), new Vector3(0.58f, 0.2f, 1f), new Color(0.16f, 0.22f, 0.3f, 1f), 16);
-        CreatePart("Visor", transform, new Vector3(facing * 0.1f, 1.92f, 0f), new Vector3(0.38f, 0.1f, 1f), new Color(0.08f, 0.11f, 0.15f, 1f), 17);
-        CreatePart("Belt", transform, new Vector3(0f, 0.75f, 0f), new Vector3(0.88f, 0.12f, 1f), new Color(0.1f, 0.12f, 0.16f, 1f), 16);
+        float barY = 2.55f;
+
+        if (bodySprite != null)
+        {
+            bodyRenderer = CreatePart("Body", transform, new Vector3(0f, 1.02f, 0f), Vector3.one * bodySpriteScale, Color.white, 14, bodySprite);
+            barY = 1.02f + bodySprite.bounds.size.y * bodySpriteScale * 0.5f + 0.22f;
+        }
+        else
+        {
+            bodyRenderer = CreatePart("Body", transform, new Vector3(0f, 1.02f, 0f), new Vector3(0.82f, 1.5f, 1f), new Color(0.27f, 0.36f, 0.49f, 1f), 14);
+            CreatePart("Head", transform, new Vector3(0f, 1.9f, 0f), new Vector3(0.46f, 0.44f, 1f), new Color(0.82f, 0.65f, 0.49f, 1f), 15);
+            CreatePart("Helmet", transform, new Vector3(0f, 2.1f, 0f), new Vector3(0.58f, 0.2f, 1f), new Color(0.16f, 0.22f, 0.3f, 1f), 16);
+            CreatePart("Visor", transform, new Vector3(facing * 0.1f, 1.92f, 0f), new Vector3(0.38f, 0.1f, 1f), new Color(0.08f, 0.11f, 0.15f, 1f), 17);
+            CreatePart("Belt", transform, new Vector3(0f, 0.75f, 0f), new Vector3(0.88f, 0.12f, 1f), new Color(0.1f, 0.12f, 0.16f, 1f), 16);
+        }
 
         GameObject shieldObject = new GameObject("Shield");
         shieldRoot = shieldObject.transform;
         shieldRoot.SetParent(transform, false);
         shieldRoot.localPosition = new Vector3(facing * 0.62f, 1.08f, 0f);
 
-        shieldRenderer = CreatePart("ShieldFace", shieldRoot, Vector3.zero, new Vector3(0.18f, 1.55f, 1f), new Color(0.58f, 0.68f, 0.82f, 1f), 18);
-        CreatePart("ShieldBoss", shieldRoot, Vector3.zero, new Vector3(0.3f, 0.24f, 1f), new Color(0.18f, 0.23f, 0.31f, 1f), 19);
+        if (shieldSprite != null)
+        {
+            shieldRenderer = CreatePart("ShieldFace", shieldRoot, Vector3.zero, Vector3.one * shieldSpriteScale, Color.white, 18, shieldSprite);
+        }
+        else
+        {
+            shieldRenderer = CreatePart("ShieldFace", shieldRoot, Vector3.zero, new Vector3(0.18f, 1.55f, 1f), new Color(0.58f, 0.68f, 0.82f, 1f), 18);
+            CreatePart("ShieldBoss", shieldRoot, Vector3.zero, new Vector3(0.3f, 0.24f, 1f), new Color(0.18f, 0.23f, 0.31f, 1f), 19);
+        }
 
         GameObject barObject = new GameObject("HealthBar");
         healthBarRoot = barObject.transform;
         healthBarRoot.SetParent(transform, false);
-        healthBarRoot.localPosition = new Vector3(0f, 2.55f, 0f);
+        healthBarRoot.localPosition = new Vector3(0f, barY, 0f);
         CreatePart("Back", healthBarRoot, Vector3.zero, new Vector3(1.5f, 0.16f, 1f), new Color(0.08f, 0.08f, 0.09f, 0.9f), 30);
         SpriteRenderer fill = CreatePart("Fill", healthBarRoot, Vector3.zero, new Vector3(barWidth, 0.09f, 1f), new Color(0.86f, 0.22f, 0.18f, 1f), 31);
         healthBarFill = fill.transform;
@@ -799,9 +831,11 @@ public class ShieldSoldier : MonoBehaviour, IDamageable, ITypedDamageable
         {
             bodyPartColors[i] = bodyParts[i].color;
         }
+
+        SetFacing(facing);
     }
 
-    private static SpriteRenderer CreatePart(string partName, Transform parent, Vector3 localPosition, Vector3 localScale, Color color, int sortingOrder)
+    private static SpriteRenderer CreatePart(string partName, Transform parent, Vector3 localPosition, Vector3 localScale, Color color, int sortingOrder, Sprite sprite = null)
     {
         GameObject part = new GameObject(partName);
         part.transform.SetParent(parent, false);
@@ -809,7 +843,7 @@ public class ShieldSoldier : MonoBehaviour, IDamageable, ITypedDamageable
         part.transform.localScale = localScale;
 
         SpriteRenderer renderer = part.AddComponent<SpriteRenderer>();
-        renderer.sprite = GetWhiteSprite();
+        renderer.sprite = sprite != null ? sprite : GetWhiteSprite();
         renderer.color = color;
         renderer.sortingOrder = sortingOrder;
         return renderer;
