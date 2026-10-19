@@ -122,7 +122,7 @@ MonoBehaviour:
   detectRange: 16
   verticalDetectTolerance: 3
   rockWallsDoNotBlockAim: 1
-  patrolSpeed: 12
+  patrolSpeed: 8
   patrolRange: 1.2
   retreatTriggerRange: 4
   retreatDistance: 6

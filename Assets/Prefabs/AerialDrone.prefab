@@ -120,7 +120,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   detectRange: 10
-  chaseSpeed: 17
+  chaseSpeed: 14
   hoverBobHeight: 0.08
   hoverBobSpeed: 3
   attackTriggerRadius: 2.5

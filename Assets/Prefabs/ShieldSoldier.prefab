@@ -122,8 +122,8 @@ MonoBehaviour:
   detectRange: 6
   verticalDetectTolerance: 2.5
   attackTriggerRange: 3
-  patrolSpeed: 10
-  chaseSpeed: 10
+  patrolSpeed: 7
+  chaseSpeed: 14
   patrolRange: 2.5
   physicalDamageReduction: 0.8
   spellDamageReduction: 0.5
