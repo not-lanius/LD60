@@ -104,36 +104,36 @@ public class TutorialTrigger : MonoBehaviour
         switch (topic)
         {
             case TutorialTopic.MoveJump:
-                ui?.ShowPrompt(GameCopy.MoveJumpPrompt, 6f);
+                ui?.PlaySequence(GameCopy.MoveJumpTutorial);
                 break;
 
             case TutorialTopic.Dodge:
-                ui?.ShowPrompt(GameCopy.DodgePrompt, 6f);
+                ui?.PlaySequence(GameCopy.DodgeTutorial);
                 break;
 
             case TutorialTopic.Door:
-                ui?.ShowPrompt(GameCopy.DoorPrompt, 4f);
+                ui?.PlaySequence(GameCopy.DoorTutorial);
                 break;
 
             case TutorialTopic.Melee:
-                ui?.ShowPrompt(GameCopy.MeleePrompt, 7f);
+                ui?.PlaySequence(GameCopy.MeleeTutorial);
                 break;
 
             case TutorialTopic.Fire:
-                ui?.ShowPrompt(GameCopy.FireHint, 9f);
-                ui?.ShowDialogue(GameCopy.FireLine, 9f);
+                ui?.PlaySequence(GameCopy.FireTutorial);
+                SpellInfoUI.Instance?.UnlockGlyph("火");
                 SpellInfoUI.Instance?.SetGlyph("火");
                 break;
 
             case TutorialTopic.MountainStele:
-                ui?.ShowPrompt(GameCopy.MountainStele, 8f);
-                ui?.ShowDialogue(GameCopy.MountainLine, 8f);
+                ui?.PlaySequence(GameCopy.MountainTutorial);
+                SpellInfoUI.Instance?.UnlockGlyph("山");
                 SpellInfoUI.Instance?.SetGlyph("山");
                 break;
 
             case TutorialTopic.LightningStele:
-                ui?.ShowPrompt(GameCopy.LightningStele, 8f);
-                ui?.ShowDialogue(GameCopy.LightningLine, 8f);
+                ui?.PlaySequence(GameCopy.LightningTutorial);
+                SpellInfoUI.Instance?.UnlockGlyph("电");
                 SpellInfoUI.Instance?.SetGlyph("电");
                 break;
         }

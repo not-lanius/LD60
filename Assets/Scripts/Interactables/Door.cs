@@ -44,6 +44,11 @@ public class Door : MonoBehaviour
 
     private void Update()
     {
+        if (TutorialUI.BlocksGameplay)
+        {
+            return;
+        }
+
         if (!CanInteract)
         {
             return;

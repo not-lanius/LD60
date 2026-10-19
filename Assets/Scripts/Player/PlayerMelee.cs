@@ -46,6 +46,11 @@ public class PlayerMelee : MonoBehaviour
 
     private void Update()
     {
+        if (TutorialUI.BlocksGameplay)
+        {
+            return;
+        }
+
         cooldownTimer = Mathf.Max(0f, cooldownTimer - Time.deltaTime);
 
         if (health != null && health.IsDead)

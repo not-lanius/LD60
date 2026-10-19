@@ -130,6 +130,11 @@ public class TalismanDrawingSystem : MonoBehaviour
 
     private void Update()
     {
+        if (TutorialUI.BlocksGameplay)
+        {
+            return;
+        }
+
         if (drawingRect == null || inkDisplay == null || inkTexture == null)
         {
             return;

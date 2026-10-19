@@ -9,11 +9,19 @@ public class SpellInfoUI : MonoBehaviour
     [SerializeField] private Text descriptionText;
     [SerializeField] private Text hintText;
 
+    [Header("Reference Glyphs")]
+    [SerializeField] private GameObject fireGlyph;
+    [SerializeField] private GameObject mountainGlyph;
+    [SerializeField] private GameObject lightningGlyph;
+
     private string currentGlyph = string.Empty;
 
     private void Awake()
     {
         Instance = this;
+        SetGlyphVisible(fireGlyph, false);
+        SetGlyphVisible(mountainGlyph, false);
+        SetGlyphVisible(lightningGlyph, false);
     }
 
     private void Start()
@@ -65,6 +73,32 @@ public class SpellInfoUI : MonoBehaviour
                 descriptionText.text = GameCopy.GenericDescription;
                 hintText.text = GameCopy.GenericHint;
                 break;
+        }
+    }
+
+    public void UnlockGlyph(string glyph)
+    {
+        switch (glyph)
+        {
+            case "火":
+                SetGlyphVisible(fireGlyph, true);
+                break;
+
+            case "山":
+                SetGlyphVisible(mountainGlyph, true);
+                break;
+
+            case "电":
+                SetGlyphVisible(lightningGlyph, true);
+                break;
+        }
+    }
+
+    private static void SetGlyphVisible(GameObject glyph, bool visible)
+    {
+        if (glyph != null)
+        {
+            glyph.SetActive(visible);
         }
     }
 }

@@ -88,6 +88,13 @@ public class PlayerController2D : MonoBehaviour
 
     private void Update()
     {
+        if (TutorialUI.BlocksGameplay)
+        {
+            moveInput = 0f;
+            climbInput = 0f;
+            return;
+        }
+
         moveInput = Input.GetAxisRaw("Horizontal");
         climbInput = Input.GetAxisRaw("Vertical");
 

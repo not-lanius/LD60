@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class StorySequenceUI : MonoBehaviour
@@ -20,10 +21,18 @@ public class StorySequenceUI : MonoBehaviour
     [SerializeField] private Color normalColor = Color.white;
     [SerializeField] private Color finalColor = new Color(0.95f, 0.18f, 0.12f);
 
+    [Header("Ending")]
+    [SerializeField] private string menuSceneName = "menu";
+    [SerializeField] private float returnToMenuDelay = 0.4f;
+    [SerializeField] private AudioClip endingBiteClip;
+    [SerializeField] private float endingBiteVolume = 0.85f;
+
     private Coroutine routine;
     private bool playing;
     private float savedTimeScale = 1f;
     private Vector2 bodyHome;
+    private AudioSource sequenceAudio;
+    private static AudioClip generatedBiteClip;
 
     public bool IsPlaying => playing;
 
@@ -39,6 +48,14 @@ public class StorySequenceUI : MonoBehaviour
         if (bodyText != null)
         {
             bodyHome = bodyText.rectTransform.anchoredPosition;
+        }
+
+        sequenceAudio = GetComponent<AudioSource>();
+        if (sequenceAudio == null)
+        {
+            sequenceAudio = gameObject.AddComponent<AudioSource>();
+            sequenceAudio.playOnAwake = false;
+            sequenceAudio.spatialBlend = 0f;
         }
 
         if (group != null)
@@ -77,10 +94,15 @@ public class StorySequenceUI : MonoBehaviour
 
     public void PlayEnding()
     {
-        Play(GameCopy.EndingLines, true);
+        Play(GameCopy.EndingLines, true, true);
     }
 
     public void Play(string[] lines, bool freezeGame)
+    {
+        Play(lines, freezeGame, false);
+    }
+
+    private void Play(string[] lines, bool freezeGame, bool returnToMenu)
     {
         if (lines == null || lines.Length == 0)
         {
@@ -92,7 +114,7 @@ public class StorySequenceUI : MonoBehaviour
             StopCoroutine(routine);
         }
 
-        routine = StartCoroutine(PlayRoutine(lines, freezeGame));
+        routine = StartCoroutine(PlayRoutine(lines, freezeGame, returnToMenu));
     }
 
     public void FinishImmediately()
@@ -106,7 +128,7 @@ public class StorySequenceUI : MonoBehaviour
         EndSequence(true);
     }
 
-    private IEnumerator PlayRoutine(string[] lines, bool freezeGame)
+    private IEnumerator PlayRoutine(string[] lines, bool freezeGame, bool returnToMenu)
     {
         playing = true;
         savedTimeScale = Time.timeScale;
@@ -154,6 +176,11 @@ public class StorySequenceUI : MonoBehaviour
         }
 
         yield return new WaitForSecondsRealtime(0.25f);
+
+        if (returnToMenu)
+        {
+            PlayEndingBite();
+        }
 
         for (int i = 0; i < lines.Length; i++)
         {
@@ -218,6 +245,8 @@ public class StorySequenceUI : MonoBehaviour
 
                 yield return ShakeText(0.35f);
             }
+
+            yield return null;
         }
 
         yield return new WaitForSecondsRealtime(0.15f);
@@ -234,6 +263,66 @@ public class StorySequenceUI : MonoBehaviour
         }
 
         EndSequence(freezeGame);
+
+        if (returnToMenu)
+        {
+            yield return new WaitForSecondsRealtime(Mathf.Max(0f, returnToMenuDelay));
+
+            if (AudioDirector.Instance != null)
+            {
+                AudioDirector.Instance.SetBulletTime(false);
+                AudioDirector.Instance.StopGalleryAmbience();
+            }
+
+            Time.timeScale = 1f;
+
+            if (!string.IsNullOrWhiteSpace(menuSceneName))
+            {
+                SceneManager.LoadScene(menuSceneName);
+            }
+        }
+    }
+
+    private void PlayEndingBite()
+    {
+        if (sequenceAudio == null)
+        {
+            return;
+        }
+
+        AudioClip clip = endingBiteClip != null ? endingBiteClip : GetGeneratedBiteClip();
+        if (clip != null)
+        {
+            sequenceAudio.PlayOneShot(clip, endingBiteVolume);
+        }
+    }
+
+    private static AudioClip GetGeneratedBiteClip()
+    {
+        if (generatedBiteClip != null)
+        {
+            return generatedBiteClip;
+        }
+
+        const int sampleRate = 44100;
+        int sampleCount = Mathf.RoundToInt(sampleRate * 0.22f);
+        float[] samples = new float[sampleCount];
+        System.Random random = new System.Random(60);
+
+        for (int i = 0; i < sampleCount; i++)
+        {
+            float t = (float)i / sampleRate;
+            float noise = (float)(random.NextDouble() * 2.0 - 1.0);
+            float crack = Mathf.Sin(2f * Mathf.PI * 1500f * t) * 0.45f
+                        + Mathf.Sin(2f * Mathf.PI * 2400f * t) * 0.25f;
+            float envelope = Mathf.Exp(-t * 22f);
+            float snap = i < sampleRate * 0.012f ? 0.8f : 0f;
+            samples[i] = ((noise * 0.75f + crack) * envelope + noise * snap) * 0.6f;
+        }
+
+        generatedBiteClip = AudioClip.Create("EndingBitePlaceholder", sampleCount, 1, sampleRate, false);
+        generatedBiteClip.SetData(samples, 0);
+        return generatedBiteClip;
     }
 
     private IEnumerator ShakeText(float duration)
