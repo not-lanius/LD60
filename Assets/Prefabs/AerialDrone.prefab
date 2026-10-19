@@ -120,7 +120,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   detectRange: 10
-  chaseSpeed: 4.5
+  chaseSpeed: 17
   hoverBobHeight: 0.08
   hoverBobSpeed: 3
   attackTriggerRadius: 2.5
@@ -130,13 +130,17 @@ MonoBehaviour:
   attackHitRadius: 0.65
   recoverDuration: 1
   cooldownDuration: 0.5
-  attackDamage: 14
+  attackDamage: 20
   attackKnockback: 8
-  maxHealth: 80
+  maxHealth: 10
+  defense: 10
+  bodySprite: {fileID: 0}
+  bodySpriteScale: 0.26
   bodyRenderer: {fileID: 0}
   visualRoot: {fileID: 0}
   rotorLeft: {fileID: 0}
   rotorRight: {fileID: 0}
+  meleeBlades: {fileID: 0}
   healthBarRoot: {fileID: 0}
   healthBarFill: {fileID: 0}
   barWidth: 1.3

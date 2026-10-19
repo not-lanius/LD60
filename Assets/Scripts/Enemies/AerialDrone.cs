@@ -22,7 +22,7 @@ public class AerialDrone : MonoBehaviour, IDamageable
     [SerializeField] private float detectRange = 10f;
 
     [Header("Movement")]
-    [SerializeField] private float chaseSpeed = 4.5f;
+    [SerializeField] private float chaseSpeed = 17f;
     [SerializeField] private float hoverBobHeight = 0.08f;
     [SerializeField] private float hoverBobSpeed = 3f;
 
@@ -34,11 +34,12 @@ public class AerialDrone : MonoBehaviour, IDamageable
     [SerializeField] private float attackHitRadius = 0.65f;
     [SerializeField] private float recoverDuration = 1f;
     [SerializeField] private float cooldownDuration = 0.5f;
-    [SerializeField] private int attackDamage = 14;
+    [SerializeField] private int attackDamage = 20;
     [SerializeField] private float attackKnockback = 8f;
 
     [Header("Defense")]
-    [SerializeField] private float maxHealth = 80f;
+    [SerializeField] private float maxHealth = 10f;
+    [SerializeField] private int defense = 10;
 
     [Header("Visuals")]
     [SerializeField] private Sprite bodySprite;
@@ -374,7 +375,14 @@ public class AerialDrone : MonoBehaviour, IDamageable
         }
 
         lastTouched = this;
-        health = Mathf.Max(0f, health - amount);
+        float appliedDamage = Mathf.Max(0f, amount - defense);
+        if (appliedDamage <= 0.01f)
+        {
+            ImpactFx.Spawn(hitPoint, new Color(0.65f, 0.85f, 1f, 0.8f), 0.5f);
+            return;
+        }
+
+        health = Mathf.Max(0f, health - appliedDamage);
         flashTimer = flashDuration;
         UpdateHealthBar();
 

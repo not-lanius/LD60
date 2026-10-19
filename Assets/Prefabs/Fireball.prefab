@@ -164,7 +164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 14
   lifetime: 0.9
-  damage: 30
+  damage: 40
   spinSpeed: 540
   baseScale: 1.15
   obstacleMask:

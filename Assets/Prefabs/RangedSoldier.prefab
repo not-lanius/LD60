@@ -121,7 +121,8 @@ MonoBehaviour:
   target: {fileID: 0}
   detectRange: 16
   verticalDetectTolerance: 3
-  patrolSpeed: 1.5
+  rockWallsDoNotBlockAim: 1
+  patrolSpeed: 12
   patrolRange: 1.2
   retreatTriggerRange: 4
   retreatDistance: 6
@@ -134,11 +135,13 @@ MonoBehaviour:
   maxFireRange: 16
   recoverDuration: 0.8
   fireCooldown: 1
-  bulletDamage: 10
+  bulletDamage: 15
   bulletKnockback: 6
   muzzleHeight: 1.25
   muzzleForward: 0.85
-  maxHealth: 100
+  shotCheckRadius: 0.08
+  maxHealth: 30
+  defense: 10
   hitStunDuration: 0.1
   groundMask:
     serializedVersion: 2
@@ -153,6 +156,8 @@ MonoBehaviour:
   ledgeCheckAhead: 0.55
   ledgeCheckDepth: 0.9
   fallRecoveryDepth: 5
+  bodySprite: {fileID: 0}
+  bodySpriteScale: 0.52
   bodyRenderer: {fileID: 0}
   weaponRoot: {fileID: 0}
   healthBarRoot: {fileID: 0}

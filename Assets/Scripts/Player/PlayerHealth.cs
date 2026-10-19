@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private int maxHealth = 100;
-    [SerializeField] private float invulnerabilityDuration = 0.9f;
+    [SerializeField] private int defense = 10;
+    [SerializeField] private float invulnerabilityDuration = 1f;
     [SerializeField] private float respawnDelay = 0.7f;
     [SerializeField] private float flashInterval = 0.08f;
 
@@ -22,6 +23,7 @@ public class PlayerHealth : MonoBehaviour
     private Color baseColor = Color.white;
 
     public int MaxHealth => maxHealth;
+    public int Defense => defense;
     public int CurrentHealth => currentHealth;
     public bool IsDead => isDead;
     public bool IsInvulnerable => invulnerabilityTimer > 0f;
@@ -87,7 +89,8 @@ public class PlayerHealth : MonoBehaviour
             return false;
         }
 
-        currentHealth = Mathf.Max(0, currentHealth - amount);
+        int finalDamage = Mathf.Max(1, amount - defense);
+        currentHealth = Mathf.Max(0, currentHealth - finalDamage);
         NotifyHealthChanged();
         invulnerabilityTimer = invulnerabilityDuration;
         flashTimer = 0f;

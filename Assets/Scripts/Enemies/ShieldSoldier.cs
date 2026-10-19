@@ -20,18 +20,18 @@ public class ShieldSoldier : MonoBehaviour, IDamageable, ITypedDamageable
 
     [Header("Perception")]
     [SerializeField] private Transform target;
-    [SerializeField] private float detectRange = 12f;
+    [SerializeField] private float detectRange = 6f;
     [SerializeField] private float verticalDetectTolerance = 2.5f;
-    [SerializeField] private float attackTriggerRange = 6f;
+    [SerializeField] private float attackTriggerRange = 3f;
 
     [Header("Movement")]
-    [SerializeField] private float patrolSpeed = 1.5f;
-    [SerializeField] private float chaseSpeed = 3.2f;
+    [SerializeField] private float patrolSpeed = 10f;
+    [SerializeField] private float chaseSpeed = 10f;
     [SerializeField] private float patrolRange = 2.5f;
 
     [Header("Shield")]
     [Range(0f, 1f)]
-    [SerializeField] private float physicalDamageReduction = 1f;
+    [SerializeField] private float physicalDamageReduction = 0.8f;
     [Range(0f, 1f)]
     [SerializeField] private float spellDamageReduction = 0.5f;
     [Range(1f, 360f)]
@@ -39,17 +39,18 @@ public class ShieldSoldier : MonoBehaviour, IDamageable, ITypedDamageable
 
     [Header("Charge")]
     [SerializeField] private float windupDuration = 0.6f;
-    [SerializeField] private float chargeSpeed = 25f;
-    [SerializeField] private float chargeMaxDistance = 10f;
+    [SerializeField] private float chargeSpeed = 15f;
+    [SerializeField] private float chargeMaxDistance = 5f;
     [SerializeField] private float chargeMaxDuration = 0.6f;
     [SerializeField] private float recoverDuration = 1.2f;
     [SerializeField] private float chargeCooldown = 2f;
-    [SerializeField] private float chargeDamage = 18f;
+    [SerializeField] private float chargeDamage = 25f;
     [SerializeField] private float chargeKnockback = 10f;
     [SerializeField] private float wallStaggerDuration = 0.6f;
 
     [Header("Defense")]
-    [SerializeField] private float maxHealth = 150f;
+    [SerializeField] private float maxHealth = 50f;
+    [SerializeField] private int defense = 10;
     [SerializeField] private float hitStunDuration = 0.12f;
 
     [Header("Ground Check")]
@@ -606,11 +607,11 @@ public class ShieldSoldier : MonoBehaviour, IDamageable, ITypedDamageable
         }
 
         lastTouched = this;
-        bool blocked = IsFrontalHit(hitPoint, hitDirection);
+        bool blocked = damageType != DamageType.Environment && IsFrontalHit(hitPoint, hitDirection);
         float reduction = blocked
             ? (damageType == DamageType.Spell ? spellDamageReduction : physicalDamageReduction)
             : 0f;
-        float appliedDamage = amount * (1f - Mathf.Clamp01(reduction));
+        float appliedDamage = Mathf.Max(0f, amount - defense) * (1f - Mathf.Clamp01(reduction));
 
         flashTimer = flashDuration;
 

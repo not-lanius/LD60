@@ -3,7 +3,8 @@ using UnityEngine;
 public enum DamageType
 {
     Physical,
-    Spell
+    Spell,
+    Environment
 }
 
 public interface ITypedDamageable

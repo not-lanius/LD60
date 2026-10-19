@@ -8,7 +8,7 @@ public class RockWall : MonoBehaviour, IDamageable
 
     [Header("Explosion")]
     [SerializeField] private float explosionRadius = 2.8f;
-    [SerializeField] private float explosionDamage = 50f;
+    [SerializeField] private float explosionDamage = 35f;
     [SerializeField] private bool damagePlayer;
 
     [Header("Visuals")]

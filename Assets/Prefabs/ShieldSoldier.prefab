@@ -119,25 +119,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  detectRange: 12
+  detectRange: 6
   verticalDetectTolerance: 2.5
-  attackTriggerRange: 6
-  patrolSpeed: 1.5
-  chaseSpeed: 3.2
+  attackTriggerRange: 3
+  patrolSpeed: 10
+  chaseSpeed: 10
   patrolRange: 2.5
-  physicalDamageReduction: 1
+  physicalDamageReduction: 0.8
   spellDamageReduction: 0.5
   shieldReductionAngle: 180
   windupDuration: 0.6
-  chargeSpeed: 25
-  chargeMaxDistance: 10
+  chargeSpeed: 15
+  chargeMaxDistance: 5
   chargeMaxDuration: 0.6
   recoverDuration: 1.2
   chargeCooldown: 2
-  chargeDamage: 18
+  chargeDamage: 25
   chargeKnockback: 10
   wallStaggerDuration: 0.6
-  maxHealth: 150
+  maxHealth: 50
+  defense: 10
   hitStunDuration: 0.12
   groundMask:
     serializedVersion: 2
@@ -149,6 +150,10 @@ MonoBehaviour:
   ledgeCheckAhead: 0.55
   ledgeCheckDepth: 0.9
   fallRecoveryDepth: 5
+  bodySprite: {fileID: 0}
+  bodySpriteScale: 0.52
+  shieldSprite: {fileID: 0}
+  shieldSpriteScale: 0.18
   bodyRenderer: {fileID: 0}
   shieldRoot: {fileID: 0}
   shieldRenderer: {fileID: 0}

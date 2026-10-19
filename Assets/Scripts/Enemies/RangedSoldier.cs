@@ -23,7 +23,7 @@ public class RangedSoldier : MonoBehaviour, IDamageable
     [SerializeField] private bool rockWallsDoNotBlockAim = true;
 
     [Header("Patrol")]
-    [SerializeField] private float patrolSpeed = 1.5f;
+    [SerializeField] private float patrolSpeed = 12f;
     [SerializeField] private float patrolRange = 2f;
 
     [Header("Retreat")]
@@ -40,14 +40,15 @@ public class RangedSoldier : MonoBehaviour, IDamageable
     [SerializeField] private float maxFireRange = 16f;
     [SerializeField] private float recoverDuration = 0.8f;
     [SerializeField] private float fireCooldown = 1f;
-    [SerializeField] private int bulletDamage = 10;
+    [SerializeField] private int bulletDamage = 15;
     [SerializeField] private float bulletKnockback = 6f;
     [SerializeField] private float muzzleHeight = 1.25f;
     [SerializeField] private float muzzleForward = 0.85f;
     [SerializeField] private float shotCheckRadius = 0.08f;
 
     [Header("Defense")]
-    [SerializeField] private float maxHealth = 100f;
+    [SerializeField] private float maxHealth = 30f;
+    [SerializeField] private int defense = 10;
     [SerializeField] private float hitStunDuration = 0.1f;
 
     [Header("Ground Check")]
@@ -583,7 +584,14 @@ public class RangedSoldier : MonoBehaviour, IDamageable
         }
 
         lastTouched = this;
-        health = Mathf.Max(0f, health - amount);
+        float appliedDamage = Mathf.Max(0f, amount - defense);
+        if (appliedDamage <= 0.01f)
+        {
+            ImpactFx.Spawn(hitPoint, new Color(0.65f, 0.85f, 1f, 0.8f), 0.5f);
+            return;
+        }
+
+        health = Mathf.Max(0f, health - appliedDamage);
         flashTimer = flashDuration;
         UpdateHealthBar();
 

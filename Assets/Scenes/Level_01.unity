@@ -219,9 +219,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8494365733653230259, guid: bee9465e238608d4dbba4ac4d074f5db, type: 3}
+      propertyPath: maxHealth
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8494365733653230259, guid: bee9465e238608d4dbba4ac4d074f5db, type: 3}
       propertyPath: bodySprite
       value: 
       objectReference: {fileID: 21300000, guid: 6144cbd31e1f59244b7da9e7be96a3c5, type: 3}
+    - target: {fileID: 8494365733653230259, guid: bee9465e238608d4dbba4ac4d074f5db, type: 3}
+      propertyPath: patrolSpeed
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8494365733653230259, guid: bee9465e238608d4dbba4ac4d074f5db, type: 3}
+      propertyPath: bulletDamage
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -737,9 +749,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8494365733653230259, guid: bee9465e238608d4dbba4ac4d074f5db, type: 3}
+      propertyPath: maxHealth
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8494365733653230259, guid: bee9465e238608d4dbba4ac4d074f5db, type: 3}
       propertyPath: bodySprite
       value: 
       objectReference: {fileID: 21300000, guid: 6144cbd31e1f59244b7da9e7be96a3c5, type: 3}
+    - target: {fileID: 8494365733653230259, guid: bee9465e238608d4dbba4ac4d074f5db, type: 3}
+      propertyPath: patrolSpeed
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8494365733653230259, guid: bee9465e238608d4dbba4ac4d074f5db, type: 3}
+      propertyPath: bulletDamage
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1252,9 +1276,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8494365733653230259, guid: bee9465e238608d4dbba4ac4d074f5db, type: 3}
+      propertyPath: maxHealth
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8494365733653230259, guid: bee9465e238608d4dbba4ac4d074f5db, type: 3}
       propertyPath: bodySprite
       value: 
       objectReference: {fileID: 21300000, guid: 6144cbd31e1f59244b7da9e7be96a3c5, type: 3}
+    - target: {fileID: 8494365733653230259, guid: bee9465e238608d4dbba4ac4d074f5db, type: 3}
+      propertyPath: patrolSpeed
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8494365733653230259, guid: bee9465e238608d4dbba4ac4d074f5db, type: 3}
+      propertyPath: bulletDamage
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1835,9 +1871,21 @@ PrefabInstance:
     m_TransformParent: {fileID: 1424492733}
     m_Modifications:
     - target: {fileID: 3711895377572309377, guid: fc0e6eb14f4899949ac3d1bcfe0e2c84, type: 3}
+      propertyPath: maxHealth
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3711895377572309377, guid: fc0e6eb14f4899949ac3d1bcfe0e2c84, type: 3}
       propertyPath: bodySprite
       value: 
       objectReference: {fileID: 21300000, guid: 8c32090e0af9bdc4a972da0fc7d3df7f, type: 3}
+    - target: {fileID: 3711895377572309377, guid: fc0e6eb14f4899949ac3d1bcfe0e2c84, type: 3}
+      propertyPath: chaseSpeed
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 3711895377572309377, guid: fc0e6eb14f4899949ac3d1bcfe0e2c84, type: 3}
+      propertyPath: attackDamage
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 4509854728513005232, guid: fc0e6eb14f4899949ac3d1bcfe0e2c84, type: 3}
       propertyPath: m_Name
       value: AerialDrone (2)
@@ -2259,9 +2307,25 @@ PrefabInstance:
       value: ShieldSoldier
       objectReference: {fileID: 0}
     - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
+      propertyPath: maxHealth
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
       propertyPath: bodySprite
       value: 
       objectReference: {fileID: 21300000, guid: 6144cbd31e1f59244b7da9e7be96a3c5, type: 3}
+    - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
+      propertyPath: chaseSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
+      propertyPath: patrolSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
+      propertyPath: chargeDamage
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
       propertyPath: shieldSprite
       value: 
@@ -2688,9 +2752,9 @@ MonoBehaviour:
     m_Bits: 64
   lightningPrefab: {fileID: 7048205151853965219, guid: 7790ebf838c932f4e9a1c6fff0c3223f, type: 3}
   playerMana: {fileID: 1648752685}
-  fireballManaCost: 20
+  fireballManaCost: 25
   rockWallManaCost: 30
-  lightningManaCost: 40
+  lightningManaCost: 20
   predictionThreshold: 0.6
   bulletTimeScale: 0.1
   bulletTimeGrace: 0.2
@@ -2997,9 +3061,25 @@ PrefabInstance:
       value: ShieldSoldier (2)
       objectReference: {fileID: 0}
     - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
+      propertyPath: maxHealth
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
       propertyPath: bodySprite
       value: 
       objectReference: {fileID: 21300000, guid: 6144cbd31e1f59244b7da9e7be96a3c5, type: 3}
+    - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
+      propertyPath: chaseSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
+      propertyPath: patrolSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
+      propertyPath: chargeDamage
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
       propertyPath: shieldSprite
       value: 
@@ -3067,9 +3147,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8494365733653230259, guid: bee9465e238608d4dbba4ac4d074f5db, type: 3}
+      propertyPath: maxHealth
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8494365733653230259, guid: bee9465e238608d4dbba4ac4d074f5db, type: 3}
       propertyPath: bodySprite
       value: 
       objectReference: {fileID: 21300000, guid: 6144cbd31e1f59244b7da9e7be96a3c5, type: 3}
+    - target: {fileID: 8494365733653230259, guid: bee9465e238608d4dbba4ac4d074f5db, type: 3}
+      propertyPath: patrolSpeed
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8494365733653230259, guid: bee9465e238608d4dbba4ac4d074f5db, type: 3}
+      propertyPath: bulletDamage
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3585,6 +3677,101 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 40}
   m_SizeDelta: {x: 1500, y: 480}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &469155090
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 469155091}
+  - component: {fileID: 469155094}
+  - component: {fileID: 469155093}
+  - component: {fileID: 469155092}
+  m_Layer: 0
+  m_Name: RecognitionPanel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &469155091
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 469155090}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1929835916}
+  - {fileID: 1324559094}
+  - {fileID: 1661473101}
+  m_Father: {fileID: 623566402}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 18, y: 18}
+  m_SizeDelta: {x: 310, y: 120}
+  m_Pivot: {x: 0, y: 0}
+--- !u!114 &469155092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 469155090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61370319bea99e54c815b6f4c6864903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  drawing: {fileID: 357875156}
+  dataText: {fileID: 1661473102}
+  successColor: {r: 0.45, g: 1, b: 0.45, a: 1}
+  failColor: {r: 1, g: 0.45, b: 0.4, a: 1}
+--- !u!114 &469155093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 469155090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.02, g: 0.02, b: 0.02, a: 0.78}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &469155094
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 469155090}
+  m_CullTransparentMesh: 1
 --- !u!1001 &477976791
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3700,9 +3887,25 @@ PrefabInstance:
       value: ShieldSoldier
       objectReference: {fileID: 0}
     - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
+      propertyPath: maxHealth
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
       propertyPath: bodySprite
       value: 
       objectReference: {fileID: 21300000, guid: 6144cbd31e1f59244b7da9e7be96a3c5, type: 3}
+    - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
+      propertyPath: chaseSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
+      propertyPath: patrolSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
+      propertyPath: chargeDamage
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
       propertyPath: shieldSprite
       value: 
@@ -3830,7 +4033,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &503291008
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3916,9 +4119,21 @@ PrefabInstance:
     m_TransformParent: {fileID: 2034794273}
     m_Modifications:
     - target: {fileID: 3711895377572309377, guid: fc0e6eb14f4899949ac3d1bcfe0e2c84, type: 3}
+      propertyPath: maxHealth
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3711895377572309377, guid: fc0e6eb14f4899949ac3d1bcfe0e2c84, type: 3}
       propertyPath: bodySprite
       value: 
       objectReference: {fileID: 21300000, guid: 8c32090e0af9bdc4a972da0fc7d3df7f, type: 3}
+    - target: {fileID: 3711895377572309377, guid: fc0e6eb14f4899949ac3d1bcfe0e2c84, type: 3}
+      propertyPath: chaseSpeed
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 3711895377572309377, guid: fc0e6eb14f4899949ac3d1bcfe0e2c84, type: 3}
+      propertyPath: attackDamage
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 4509854728513005232, guid: fc0e6eb14f4899949ac3d1bcfe0e2c84, type: 3}
       propertyPath: m_Name
       value: AerialDrone (2)
@@ -4430,9 +4645,25 @@ PrefabInstance:
       value: ShieldSoldier (2)
       objectReference: {fileID: 0}
     - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
+      propertyPath: maxHealth
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
       propertyPath: bodySprite
       value: 
       objectReference: {fileID: 21300000, guid: 6144cbd31e1f59244b7da9e7be96a3c5, type: 3}
+    - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
+      propertyPath: chaseSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
+      propertyPath: patrolSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
+      propertyPath: chargeDamage
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
       propertyPath: shieldSprite
       value: 
@@ -4825,9 +5056,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8494365733653230259, guid: bee9465e238608d4dbba4ac4d074f5db, type: 3}
+      propertyPath: maxHealth
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8494365733653230259, guid: bee9465e238608d4dbba4ac4d074f5db, type: 3}
       propertyPath: bodySprite
       value: 
       objectReference: {fileID: 21300000, guid: 6144cbd31e1f59244b7da9e7be96a3c5, type: 3}
+    - target: {fileID: 8494365733653230259, guid: bee9465e238608d4dbba4ac4d074f5db, type: 3}
+      propertyPath: patrolSpeed
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8494365733653230259, guid: bee9465e238608d4dbba4ac4d074f5db, type: 3}
+      propertyPath: bulletDamage
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6387,6 +6630,7 @@ RectTransform:
   - {fileID: 510778487}
   - {fileID: 239770789}
   - {fileID: 1183773370}
+  - {fileID: 469155091}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -6637,9 +6881,21 @@ PrefabInstance:
     m_TransformParent: {fileID: 2034794273}
     m_Modifications:
     - target: {fileID: 3711895377572309377, guid: fc0e6eb14f4899949ac3d1bcfe0e2c84, type: 3}
+      propertyPath: maxHealth
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3711895377572309377, guid: fc0e6eb14f4899949ac3d1bcfe0e2c84, type: 3}
       propertyPath: bodySprite
       value: 
       objectReference: {fileID: 21300000, guid: 8c32090e0af9bdc4a972da0fc7d3df7f, type: 3}
+    - target: {fileID: 3711895377572309377, guid: fc0e6eb14f4899949ac3d1bcfe0e2c84, type: 3}
+      propertyPath: chaseSpeed
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 3711895377572309377, guid: fc0e6eb14f4899949ac3d1bcfe0e2c84, type: 3}
+      propertyPath: attackDamage
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 4509854728513005232, guid: fc0e6eb14f4899949ac3d1bcfe0e2c84, type: 3}
       propertyPath: m_Name
       value: AerialDrone (1)
@@ -6959,9 +7215,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8494365733653230259, guid: bee9465e238608d4dbba4ac4d074f5db, type: 3}
+      propertyPath: maxHealth
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8494365733653230259, guid: bee9465e238608d4dbba4ac4d074f5db, type: 3}
       propertyPath: bodySprite
       value: 
       objectReference: {fileID: 21300000, guid: 6144cbd31e1f59244b7da9e7be96a3c5, type: 3}
+    - target: {fileID: 8494365733653230259, guid: bee9465e238608d4dbba4ac4d074f5db, type: 3}
+      propertyPath: patrolSpeed
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8494365733653230259, guid: bee9465e238608d4dbba4ac4d074f5db, type: 3}
+      propertyPath: bulletDamage
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7100,9 +7368,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8494365733653230259, guid: bee9465e238608d4dbba4ac4d074f5db, type: 3}
+      propertyPath: maxHealth
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8494365733653230259, guid: bee9465e238608d4dbba4ac4d074f5db, type: 3}
       propertyPath: bodySprite
       value: 
       objectReference: {fileID: 21300000, guid: 6144cbd31e1f59244b7da9e7be96a3c5, type: 3}
+    - target: {fileID: 8494365733653230259, guid: bee9465e238608d4dbba4ac4d074f5db, type: 3}
+      propertyPath: patrolSpeed
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8494365733653230259, guid: bee9465e238608d4dbba4ac4d074f5db, type: 3}
+      propertyPath: bulletDamage
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7166,9 +7446,25 @@ PrefabInstance:
       value: ShieldSoldier
       objectReference: {fileID: 0}
     - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
+      propertyPath: maxHealth
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
       propertyPath: bodySprite
       value: 
       objectReference: {fileID: 21300000, guid: 6144cbd31e1f59244b7da9e7be96a3c5, type: 3}
+    - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
+      propertyPath: chaseSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
+      propertyPath: patrolSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
+      propertyPath: chargeDamage
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
       propertyPath: shieldSprite
       value: 
@@ -7414,9 +7710,25 @@ PrefabInstance:
       value: ShieldSoldier (1)
       objectReference: {fileID: 0}
     - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
+      propertyPath: maxHealth
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
       propertyPath: bodySprite
       value: 
       objectReference: {fileID: 21300000, guid: 6144cbd31e1f59244b7da9e7be96a3c5, type: 3}
+    - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
+      propertyPath: chaseSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
+      propertyPath: patrolSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
+      propertyPath: chargeDamage
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
       propertyPath: shieldSprite
       value: 
@@ -7855,9 +8167,21 @@ PrefabInstance:
     m_TransformParent: {fileID: 1424492733}
     m_Modifications:
     - target: {fileID: 3711895377572309377, guid: fc0e6eb14f4899949ac3d1bcfe0e2c84, type: 3}
+      propertyPath: maxHealth
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3711895377572309377, guid: fc0e6eb14f4899949ac3d1bcfe0e2c84, type: 3}
       propertyPath: bodySprite
       value: 
       objectReference: {fileID: 21300000, guid: 8c32090e0af9bdc4a972da0fc7d3df7f, type: 3}
+    - target: {fileID: 3711895377572309377, guid: fc0e6eb14f4899949ac3d1bcfe0e2c84, type: 3}
+      propertyPath: chaseSpeed
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 3711895377572309377, guid: fc0e6eb14f4899949ac3d1bcfe0e2c84, type: 3}
+      propertyPath: attackDamage
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 4509854728513005232, guid: fc0e6eb14f4899949ac3d1bcfe0e2c84, type: 3}
       propertyPath: m_Name
       value: AerialDrone (3)
@@ -8510,9 +8834,25 @@ PrefabInstance:
       value: ShieldSoldier (3)
       objectReference: {fileID: 0}
     - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
+      propertyPath: maxHealth
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
       propertyPath: bodySprite
       value: 
       objectReference: {fileID: 21300000, guid: 6144cbd31e1f59244b7da9e7be96a3c5, type: 3}
+    - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
+      propertyPath: chaseSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
+      propertyPath: patrolSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
+      propertyPath: chargeDamage
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
       propertyPath: shieldSprite
       value: 
@@ -8536,9 +8876,21 @@ PrefabInstance:
     m_TransformParent: {fileID: 1424492733}
     m_Modifications:
     - target: {fileID: 3711895377572309377, guid: fc0e6eb14f4899949ac3d1bcfe0e2c84, type: 3}
+      propertyPath: maxHealth
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3711895377572309377, guid: fc0e6eb14f4899949ac3d1bcfe0e2c84, type: 3}
       propertyPath: bodySprite
       value: 
       objectReference: {fileID: 21300000, guid: 8c32090e0af9bdc4a972da0fc7d3df7f, type: 3}
+    - target: {fileID: 3711895377572309377, guid: fc0e6eb14f4899949ac3d1bcfe0e2c84, type: 3}
+      propertyPath: chaseSpeed
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 3711895377572309377, guid: fc0e6eb14f4899949ac3d1bcfe0e2c84, type: 3}
+      propertyPath: attackDamage
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 4509854728513005232, guid: fc0e6eb14f4899949ac3d1bcfe0e2c84, type: 3}
       propertyPath: m_Name
       value: AerialDrone
@@ -8646,9 +8998,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8494365733653230259, guid: bee9465e238608d4dbba4ac4d074f5db, type: 3}
+      propertyPath: maxHealth
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8494365733653230259, guid: bee9465e238608d4dbba4ac4d074f5db, type: 3}
       propertyPath: bodySprite
       value: 
       objectReference: {fileID: 21300000, guid: 6144cbd31e1f59244b7da9e7be96a3c5, type: 3}
+    - target: {fileID: 8494365733653230259, guid: bee9465e238608d4dbba4ac4d074f5db, type: 3}
+      propertyPath: patrolSpeed
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8494365733653230259, guid: bee9465e238608d4dbba4ac4d074f5db, type: 3}
+      propertyPath: bulletDamage
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8807,9 +9171,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8494365733653230259, guid: bee9465e238608d4dbba4ac4d074f5db, type: 3}
+      propertyPath: maxHealth
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8494365733653230259, guid: bee9465e238608d4dbba4ac4d074f5db, type: 3}
       propertyPath: bodySprite
       value: 
       objectReference: {fileID: 21300000, guid: 6144cbd31e1f59244b7da9e7be96a3c5, type: 3}
+    - target: {fileID: 8494365733653230259, guid: bee9465e238608d4dbba4ac4d074f5db, type: 3}
+      propertyPath: patrolSpeed
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8494365733653230259, guid: bee9465e238608d4dbba4ac4d074f5db, type: 3}
+      propertyPath: bulletDamage
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9151,9 +9527,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8494365733653230259, guid: bee9465e238608d4dbba4ac4d074f5db, type: 3}
+      propertyPath: maxHealth
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8494365733653230259, guid: bee9465e238608d4dbba4ac4d074f5db, type: 3}
       propertyPath: bodySprite
       value: 
       objectReference: {fileID: 21300000, guid: 6144cbd31e1f59244b7da9e7be96a3c5, type: 3}
+    - target: {fileID: 8494365733653230259, guid: bee9465e238608d4dbba4ac4d074f5db, type: 3}
+      propertyPath: patrolSpeed
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8494365733653230259, guid: bee9465e238608d4dbba4ac4d074f5db, type: 3}
+      propertyPath: bulletDamage
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10149,9 +10537,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8494365733653230259, guid: bee9465e238608d4dbba4ac4d074f5db, type: 3}
+      propertyPath: maxHealth
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8494365733653230259, guid: bee9465e238608d4dbba4ac4d074f5db, type: 3}
       propertyPath: bodySprite
       value: 
       objectReference: {fileID: 21300000, guid: 6144cbd31e1f59244b7da9e7be96a3c5, type: 3}
+    - target: {fileID: 8494365733653230259, guid: bee9465e238608d4dbba4ac4d074f5db, type: 3}
+      propertyPath: patrolSpeed
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8494365733653230259, guid: bee9465e238608d4dbba4ac4d074f5db, type: 3}
+      propertyPath: bulletDamage
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10519,9 +10919,25 @@ PrefabInstance:
       value: ShieldSoldier
       objectReference: {fileID: 0}
     - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
+      propertyPath: maxHealth
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
       propertyPath: bodySprite
       value: 
       objectReference: {fileID: 21300000, guid: 6144cbd31e1f59244b7da9e7be96a3c5, type: 3}
+    - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
+      propertyPath: chaseSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
+      propertyPath: patrolSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
+      propertyPath: chargeDamage
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
       propertyPath: shieldSprite
       value: 
@@ -10545,9 +10961,21 @@ PrefabInstance:
     m_TransformParent: {fileID: 1424492733}
     m_Modifications:
     - target: {fileID: 3711895377572309377, guid: fc0e6eb14f4899949ac3d1bcfe0e2c84, type: 3}
+      propertyPath: maxHealth
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3711895377572309377, guid: fc0e6eb14f4899949ac3d1bcfe0e2c84, type: 3}
       propertyPath: bodySprite
       value: 
       objectReference: {fileID: 21300000, guid: 8c32090e0af9bdc4a972da0fc7d3df7f, type: 3}
+    - target: {fileID: 3711895377572309377, guid: fc0e6eb14f4899949ac3d1bcfe0e2c84, type: 3}
+      propertyPath: chaseSpeed
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 3711895377572309377, guid: fc0e6eb14f4899949ac3d1bcfe0e2c84, type: 3}
+      propertyPath: attackDamage
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 4509854728513005232, guid: fc0e6eb14f4899949ac3d1bcfe0e2c84, type: 3}
       propertyPath: m_Name
       value: AerialDrone (4)
@@ -10602,6 +11030,85 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4855449360104245403, guid: fc0e6eb14f4899949ac3d1bcfe0e2c84, type: 3}
   m_PrefabInstance: {fileID: 1293151264}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1324559093
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1324559094}
+  - component: {fileID: 1324559096}
+  - component: {fileID: 1324559095}
+  m_Layer: 0
+  m_Name: Title
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1324559094
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1324559093}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 469155091}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 2, y: -4}
+  m_SizeDelta: {x: -28, y: 24}
+  m_Pivot: {x: 0.5, y: 1}
+--- !u!114 &1324559095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1324559093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.8, g: 0.66, b: 0.36, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 15
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 3
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: TALISMAN CHECK
+--- !u!222 &1324559096
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1324559093}
+  m_CullTransparentMesh: 1
 --- !u!1 &1373538667
 GameObject:
   m_ObjectHideFlags: 0
@@ -11428,9 +11935,25 @@ PrefabInstance:
       value: ShieldSoldier (1)
       objectReference: {fileID: 0}
     - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
+      propertyPath: maxHealth
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
       propertyPath: bodySprite
       value: 
       objectReference: {fileID: 21300000, guid: 6144cbd31e1f59244b7da9e7be96a3c5, type: 3}
+    - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
+      propertyPath: chaseSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
+      propertyPath: patrolSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
+      propertyPath: chargeDamage
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
       propertyPath: shieldSprite
       value: 
@@ -11731,9 +12254,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8494365733653230259, guid: bee9465e238608d4dbba4ac4d074f5db, type: 3}
+      propertyPath: maxHealth
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8494365733653230259, guid: bee9465e238608d4dbba4ac4d074f5db, type: 3}
       propertyPath: bodySprite
       value: 
       objectReference: {fileID: 21300000, guid: 6144cbd31e1f59244b7da9e7be96a3c5, type: 3}
+    - target: {fileID: 8494365733653230259, guid: bee9465e238608d4dbba4ac4d074f5db, type: 3}
+      propertyPath: patrolSpeed
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8494365733653230259, guid: bee9465e238608d4dbba4ac4d074f5db, type: 3}
+      propertyPath: bulletDamage
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12218,7 +12753,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbc954b45606fa942859ffc2a1dfcca8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 8
+  moveSpeed: 15
   groundAcceleration: 80
   groundDeceleration: 100
   airAcceleration: 45
@@ -12334,7 +12869,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  invulnerabilityDuration: 0.9
+  defense: 10
+  invulnerabilityDuration: 1
   respawnDelay: 0.7
   flashInterval: 0.08
 --- !u!114 &1648752685
@@ -12365,11 +12901,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f21177d10eb9dcd4aab697b42be04f17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 35
+  damage: 15
   cooldown: 0.35
   attackOffset: 1.425
   attackSize: {x: 2.7, y: 2.4}
-  manaPerHit: 12
+  manaPerHit: 20
   swordVisual: {fileID: 1137858665}
   slashColor: {r: 1, g: 0.95, b: 0.7, a: 0.95}
   slashRadius: 1.725
@@ -12495,6 +13031,85 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &1661473100
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1661473101}
+  - component: {fileID: 1661473103}
+  - component: {fileID: 1661473102}
+  m_Layer: 0
+  m_Name: Data
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1661473101
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1661473100}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 469155091}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 2, y: -10}
+  m_SizeDelta: {x: -28, y: -40}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1661473102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1661473100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.84, g: 0.81, b: 0.74, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 17
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1.1
+  m_Text: "Neatness: 0%\nPredicted: \u2014\nDetected: NO"
+--- !u!222 &1661473103
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1661473100}
+  m_CullTransparentMesh: 1
 --- !u!1 &1670230089
 GameObject:
   m_ObjectHideFlags: 0
@@ -12831,9 +13446,21 @@ PrefabInstance:
     m_TransformParent: {fileID: 1424492733}
     m_Modifications:
     - target: {fileID: 3711895377572309377, guid: fc0e6eb14f4899949ac3d1bcfe0e2c84, type: 3}
+      propertyPath: maxHealth
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3711895377572309377, guid: fc0e6eb14f4899949ac3d1bcfe0e2c84, type: 3}
       propertyPath: bodySprite
       value: 
       objectReference: {fileID: 21300000, guid: 8c32090e0af9bdc4a972da0fc7d3df7f, type: 3}
+    - target: {fileID: 3711895377572309377, guid: fc0e6eb14f4899949ac3d1bcfe0e2c84, type: 3}
+      propertyPath: chaseSpeed
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 3711895377572309377, guid: fc0e6eb14f4899949ac3d1bcfe0e2c84, type: 3}
+      propertyPath: attackDamage
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 4509854728513005232, guid: fc0e6eb14f4899949ac3d1bcfe0e2c84, type: 3}
       propertyPath: m_Name
       value: AerialDrone (5)
@@ -38642,9 +39269,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8494365733653230259, guid: bee9465e238608d4dbba4ac4d074f5db, type: 3}
+      propertyPath: maxHealth
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8494365733653230259, guid: bee9465e238608d4dbba4ac4d074f5db, type: 3}
       propertyPath: bodySprite
       value: 
       objectReference: {fileID: 21300000, guid: 6144cbd31e1f59244b7da9e7be96a3c5, type: 3}
+    - target: {fileID: 8494365733653230259, guid: bee9465e238608d4dbba4ac4d074f5db, type: 3}
+      propertyPath: patrolSpeed
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8494365733653230259, guid: bee9465e238608d4dbba4ac4d074f5db, type: 3}
+      propertyPath: bulletDamage
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -39285,9 +39924,25 @@ PrefabInstance:
       value: ShieldSoldier (2)
       objectReference: {fileID: 0}
     - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
+      propertyPath: maxHealth
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
       propertyPath: bodySprite
       value: 
       objectReference: {fileID: 21300000, guid: 6144cbd31e1f59244b7da9e7be96a3c5, type: 3}
+    - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
+      propertyPath: chaseSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
+      propertyPath: patrolSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
+      propertyPath: chargeDamage
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 7887219431432338320, guid: f2b89f5aa7fc51a4aa489d6fd243e820, type: 3}
       propertyPath: shieldSprite
       value: 
@@ -39602,6 +40257,81 @@ RectTransform:
   m_AnchoredPosition: {x: -60, y: 45}
   m_SizeDelta: {x: 520, y: 30}
   m_Pivot: {x: 1, y: 0}
+--- !u!1 &1929835915
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1929835916}
+  - component: {fileID: 1929835918}
+  - component: {fileID: 1929835917}
+  m_Layer: 0
+  m_Name: Accent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1929835916
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1929835915}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 469155091}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 4, y: 0}
+  m_Pivot: {x: 0, y: 0.5}
+--- !u!114 &1929835917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1929835915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.8, g: 0.66, b: 0.36, a: 0.9}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1929835918
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1929835915}
+  m_CullTransparentMesh: 1
 --- !u!1001 &1935704870
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39980,7 +40710,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "Copy above \xB7 RMB: Draw \xB7 F: Cast \xB7 R: Clear"
+  m_Text: "Draw \xB7 F: Cast \xB7 R: Clear"
 --- !u!222 &1957287782
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -40551,9 +41281,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8494365733653230259, guid: bee9465e238608d4dbba4ac4d074f5db, type: 3}
+      propertyPath: maxHealth
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8494365733653230259, guid: bee9465e238608d4dbba4ac4d074f5db, type: 3}
       propertyPath: bodySprite
       value: 
       objectReference: {fileID: 21300000, guid: 6144cbd31e1f59244b7da9e7be96a3c5, type: 3}
+    - target: {fileID: 8494365733653230259, guid: bee9465e238608d4dbba4ac4d074f5db, type: 3}
+      propertyPath: patrolSpeed
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8494365733653230259, guid: bee9465e238608d4dbba4ac4d074f5db, type: 3}
+      propertyPath: bulletDamage
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

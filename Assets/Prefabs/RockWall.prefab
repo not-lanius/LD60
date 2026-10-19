@@ -178,7 +178,7 @@ MonoBehaviour:
   maxHealth: 150
   lifetime: 12
   explosionRadius: 2.8
-  explosionDamage: 50
+  explosionDamage: 35
   damagePlayer: 0
   bodyRenderer: {fileID: 4060168039055891601}
   flashColor: {r: 1, g: 1, b: 1, a: 1}

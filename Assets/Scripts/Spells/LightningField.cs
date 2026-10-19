@@ -9,8 +9,8 @@ public class LightningField : MonoBehaviour
     [SerializeField] private float bottomOffset = 0.1f;
 
     [Header("Damage")]
-    [SerializeField] private float damagePerTick = 18f;
-    [SerializeField] private int tickCount = 3;
+    [SerializeField] private float damagePerTick = 25f;
+    [SerializeField] private int tickCount = 1;
     [SerializeField] private float tickInterval = 0.12f;
 
     [Header("Visuals")]

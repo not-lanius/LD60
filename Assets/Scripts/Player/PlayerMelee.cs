@@ -6,13 +6,13 @@ using UnityEngine.EventSystems;
 public class PlayerMelee : MonoBehaviour
 {
     [Header("Attack")]
-    [SerializeField] private float damage = 35f;
+    [SerializeField] private float damage = 15f;
     [SerializeField] private float cooldown = 0.35f;
     [SerializeField] private float attackOffset = 0.95f;
     [SerializeField] private Vector2 attackSize = new Vector2(1.8f, 1.6f);
 
     [Header("Mana")]
-    [SerializeField] private int manaPerHit = 12;
+    [SerializeField] private int manaPerHit = 20;
 
     [Header("References")]
     [SerializeField] private PlayerSwordVisual swordVisual;

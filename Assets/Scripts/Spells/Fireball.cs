@@ -4,7 +4,7 @@ public class Fireball : MonoBehaviour
 {
     [SerializeField] private float speed = 14f;
     [SerializeField] private float lifetime = 0.9f;
-    [SerializeField] private float damage = 30f;
+    [SerializeField] private float damage = 40f;
     [SerializeField] private float spinSpeed = 540f;
     [SerializeField] private float baseScale = 1.15f;
     [SerializeField] private LayerMask obstacleMask;

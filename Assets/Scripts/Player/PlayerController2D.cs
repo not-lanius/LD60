@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerController2D : MonoBehaviour
 {
     [Header("Run")]
-    [SerializeField] private float moveSpeed = 8f;
+    [SerializeField] private float moveSpeed = 15f;
     [SerializeField] private float groundAcceleration = 80f;
     [SerializeField] private float groundDeceleration = 100f;
     [SerializeField] private float airAcceleration = 45f;

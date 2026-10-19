@@ -24,9 +24,9 @@ public class TalismanDrawingSystem : MonoBehaviour
 
     [Header("Mana Cost")]
     [SerializeField] private PlayerMana playerMana;
-    [SerializeField] private int fireballManaCost = 20;
+    [SerializeField] private int fireballManaCost = 25;
     [SerializeField] private int rockWallManaCost = 30;
-    [SerializeField] private int lightningManaCost = 40;
+    [SerializeField] private int lightningManaCost = 20;
 
     [Header("Prediction")]
     [SerializeField] private float predictionThreshold = 0.6f;
