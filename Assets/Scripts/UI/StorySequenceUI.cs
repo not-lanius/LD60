@@ -21,6 +21,10 @@ public class StorySequenceUI : MonoBehaviour
     [SerializeField] private Color normalColor = Color.white;
     [SerializeField] private Color finalColor = new Color(0.95f, 0.18f, 0.12f);
 
+    [Header("Opening Narration")]
+    [SerializeField] private AudioClip openingNarrationClip;
+    [SerializeField] private float openingNarrationVolume = 0.85f;
+
     [Header("Ending")]
     [SerializeField] private string menuSceneName = "menu";
     [SerializeField] private float returnToMenuDelay = 0.4f;
@@ -29,6 +33,7 @@ public class StorySequenceUI : MonoBehaviour
 
     private Coroutine routine;
     private bool playing;
+    private bool skipLineRequested;
     private float savedTimeScale = 1f;
     private Vector2 bodyHome;
     private AudioSource sequenceAudio;
@@ -79,6 +84,14 @@ public class StorySequenceUI : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (playing && Input.anyKeyDown)
+        {
+            skipLineRequested = true;
+        }
+    }
+
     private void Start()
     {
         if (playOpeningOnStart)
@@ -89,20 +102,20 @@ public class StorySequenceUI : MonoBehaviour
 
     public void PlayOpening()
     {
-        Play(GameCopy.OpeningLines, true);
+        Play(GameCopy.OpeningLines, true, false, true);
     }
 
     public void PlayEnding()
     {
-        Play(GameCopy.EndingLines, true, true);
+        Play(GameCopy.EndingLines, true, true, false);
     }
 
     public void Play(string[] lines, bool freezeGame)
     {
-        Play(lines, freezeGame, false);
+        Play(lines, freezeGame, false, false);
     }
 
-    private void Play(string[] lines, bool freezeGame, bool returnToMenu)
+    private void Play(string[] lines, bool freezeGame, bool returnToMenu, bool withNarration)
     {
         if (lines == null || lines.Length == 0)
         {
@@ -114,7 +127,7 @@ public class StorySequenceUI : MonoBehaviour
             StopCoroutine(routine);
         }
 
-        routine = StartCoroutine(PlayRoutine(lines, freezeGame, returnToMenu));
+        routine = StartCoroutine(PlayRoutine(lines, freezeGame, returnToMenu, withNarration));
     }
 
     public void FinishImmediately()
@@ -128,9 +141,10 @@ public class StorySequenceUI : MonoBehaviour
         EndSequence(true);
     }
 
-    private IEnumerator PlayRoutine(string[] lines, bool freezeGame, bool returnToMenu)
+    private IEnumerator PlayRoutine(string[] lines, bool freezeGame, bool returnToMenu, bool withNarration)
     {
         playing = true;
+        skipLineRequested = false;
         savedTimeScale = Time.timeScale;
 
         if (freezeGame)
@@ -177,6 +191,27 @@ public class StorySequenceUI : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(0.25f);
 
+        if (withNarration && openingNarrationClip != null && sequenceAudio != null)
+        {
+            sequenceAudio.Stop();
+            sequenceAudio.clip = openingNarrationClip;
+            sequenceAudio.loop = false;
+            sequenceAudio.volume = openingNarrationVolume;
+            sequenceAudio.Play();
+        }
+
+        float narrationLength = withNarration && openingNarrationClip != null
+            ? openingNarrationClip.length
+            : 0f;
+        int narrationTotalChars = 0;
+        if (narrationLength > 0f)
+        {
+            for (int i = 0; i < lines.Length; i++)
+            {
+                narrationTotalChars += Mathf.Max(1, lines[i].Length);
+            }
+        }
+
         if (returnToMenu)
         {
             PlayEndingBite();
@@ -186,6 +221,18 @@ public class StorySequenceUI : MonoBehaviour
         {
             bool lastLine = i == lines.Length - 1;
             string line = lines[i];
+            float typeSpeed = charactersPerSecond;
+            float hold = lineHold;
+            bool lineSkipped = false;
+            bool revealedByKey = false;
+
+            if (narrationLength > 0f && narrationTotalChars > 0)
+            {
+                float lineBudget = narrationLength * (Mathf.Max(1, line.Length) / (float)narrationTotalChars);
+                float typeBudget = Mathf.Max(0.1f, lineBudget * 0.8f);
+                typeSpeed = Mathf.Max(1f, line.Length / typeBudget);
+                hold = Mathf.Max(0f, lineBudget - typeBudget);
+            }
 
             if (bodyText != null)
             {
@@ -194,16 +241,17 @@ public class StorySequenceUI : MonoBehaviour
                 bodyText.rectTransform.anchoredPosition = bodyHome;
             }
 
-            bool reveal = false;
+            if (withNarration && sequenceAudio != null && !sequenceAudio.isPlaying)
+            {
+                sequenceAudio.UnPause();
+            }
+
             for (int c = 0; c < line.Length; c++)
             {
-                if (Input.anyKeyDown)
+                if (skipLineRequested)
                 {
-                    reveal = true;
-                }
-
-                if (reveal)
-                {
+                    skipLineRequested = false;
+                    revealedByKey = true;
                     break;
                 }
 
@@ -212,12 +260,12 @@ public class StorySequenceUI : MonoBehaviour
                     bodyText.text = line.Substring(0, c + 1);
                 }
 
-                if (c % 3 == 0 && AudioDirector.Instance != null)
-                {
-                    AudioDirector.Instance.PlayWriting();
-                }
+                yield return new WaitForSecondsRealtime(1f / Mathf.Max(1f, typeSpeed));
+            }
 
-                yield return new WaitForSecondsRealtime(1f / Mathf.Max(1f, charactersPerSecond));
+            if (withNarration && sequenceAudio != null && sequenceAudio.isPlaying)
+            {
+                sequenceAudio.Pause();
             }
 
             if (bodyText != null)
@@ -226,11 +274,13 @@ public class StorySequenceUI : MonoBehaviour
             }
 
             float elapsed = 0f;
-            while (elapsed < lineHold)
+            while (!lineSkipped && (revealedByKey || elapsed < hold))
             {
                 elapsed += Time.unscaledDeltaTime;
-                if (Input.anyKeyDown)
+                if (skipLineRequested)
                 {
+                    skipLineRequested = false;
+                    lineSkipped = true;
                     break;
                 }
                 yield return null;
@@ -346,7 +396,13 @@ public class StorySequenceUI : MonoBehaviour
     private void EndSequence(bool restoreTime)
     {
         playing = false;
+        skipLineRequested = false;
         routine = null;
+
+        if (sequenceAudio != null)
+        {
+            sequenceAudio.Stop();
+        }
 
         if (background != null)
         {
