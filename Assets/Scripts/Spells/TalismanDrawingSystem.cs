@@ -69,9 +69,16 @@ public class TalismanDrawingSystem : MonoBehaviour
     public string Status { get; private set; } = "等待绘制";
     public bool IsBulletTimeActive => bulletTimeActive;
     public float AcceptThreshold => acceptThreshold;
+    public bool IsDrawing => isDrawing;
+    public static TalismanDrawingSystem Active { get; private set; }
 
     private static readonly Color32 InkColor = new Color32(28, 18, 10, 255);
     private static readonly Color32 ClearColor = new Color32(0, 0, 0, 0);
+
+    private void Awake()
+    {
+        Active = this;
+    }
 
     private void Start()
     {
@@ -91,6 +98,11 @@ public class TalismanDrawingSystem : MonoBehaviour
 
     private void OnDestroy()
     {
+        if (Active == this)
+        {
+            Active = null;
+        }
+
         RestoreTimeScale();
 
         if (inkTexture != null)
@@ -408,7 +420,7 @@ public class TalismanDrawingSystem : MonoBehaviour
         Camera eventCamera = GetEventCamera();
         bool overArea = RectTransformUtility.RectangleContainsScreenPoint(drawingRect, Input.mousePosition, eventCamera);
 
-        if (!isDrawing && Input.GetMouseButtonDown(1) && overArea)
+        if (!isDrawing && Input.GetMouseButtonDown(0) && overArea)
         {
             BeginStroke(Input.mousePosition, eventCamera);
         }
@@ -418,7 +430,7 @@ public class TalismanDrawingSystem : MonoBehaviour
             return;
         }
 
-        if (Input.GetMouseButton(1))
+        if (Input.GetMouseButton(0))
         {
             if (TryGetNormalizedPoint(Input.mousePosition, eventCamera, out Vector2 point))
             {
@@ -548,6 +560,16 @@ public class TalismanDrawingSystem : MonoBehaviour
         float v = Mathf.InverseLerp(rect.yMin, rect.yMax, local.y);
         normalized = new Vector2(Mathf.Clamp01(u), Mathf.Clamp01(v));
         return true;
+    }
+
+    public bool ContainsPointer(Vector2 screenPoint)
+    {
+        if (drawingRect == null)
+        {
+            return false;
+        }
+
+        return RectTransformUtility.RectangleContainsScreenPoint(drawingRect, screenPoint, GetEventCamera());
     }
 
     private Camera GetEventCamera()

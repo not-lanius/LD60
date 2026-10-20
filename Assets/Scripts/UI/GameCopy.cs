@@ -20,17 +20,17 @@ public static class GameCopy
     public const string StelePrompt = "Press [E] to touch the ancient stele";
 
     public const string FireLine = "\"Stand between me and my banana? BURN! Behold the ancient art of [FIRE]!\"";
-    public const string FireHint = "Time slowed! Copy the [FIRE] glyph shown above onto the yellow talisman. Hold [Right Click] to draw, [F] to cast, [R] to redraw.";
+    public const string FireHint = "Time slowed! Copy the [FIRE] glyph shown above onto the yellow talisman. Hold [Left Click] to draw, [F] to cast, [R] to redraw.";
     public const string FireDescription = "[FIRE] — Draw like flames.\nLaunches a mid-range fireball. Ignites foes and explosive barrels.";
 
     public const string MountainStele = "You touched a relic inscribed with a bulletproof secret—the [MOUNTAIN] glyph!";
     public const string MountainLine = "\"Modern bullets are fast, but can they pierce a [MOUNTAIN]? Let's raise a rock wall!\"";
-    public const string MountainDraw = "Copy the [MOUNTAIN] glyph shown above onto the talisman. Hold [Right Click] to draw, [F] to cast, [R] to redraw.";
+    public const string MountainDraw = "Copy the [MOUNTAIN] glyph shown above onto the talisman. Hold [Left Click] to draw, [F] to cast, [R] to redraw.";
     public const string MountainDescription = "[MOUNTAIN] — Draw 3 peaks.\nSummons a rock wall to block bullets. Explodes when destroyed!";
 
     public const string LightningStele = "Enlightenment! Learned the anti-air thunder art—the [LIGHTNING] glyph!";
     public const string LightningLine = "\"What are those buzzing iron birds?! Too high for my sword... Taste the Five Thunders!\"";
-    public const string LightningDraw = "Copy the [LIGHTNING] glyph shown above onto the talisman. Hold [Right Click] to draw, [F] to cast, [R] to redraw.";
+    public const string LightningDraw = "Copy the [LIGHTNING] glyph shown above onto the talisman. Hold [Left Click] to draw, [F] to cast, [R] to redraw.";
     public const string LightningDescription = "[LIGHTNING] — Draw a thunderbolt.\nCalls down sky thunder to zap airborne drones!";
 
     public const string GenericHint = "Copy the glyph shown above onto the talisman\n[F] Cast · [R] Redraw";
@@ -59,7 +59,7 @@ public static class GameCopy
     public static readonly string[] MeleeTutorial =
     {
         "Press [Left Click] to Slash!",
-        "Hit enemies to gain MP. MP also regenerates slowly out of combat!"
+        "Hit enemies to gain MP (regenerates out of combat). On the talisman, [Left Click] draws instead."
     };
 
     public static readonly string[] FireTutorial =

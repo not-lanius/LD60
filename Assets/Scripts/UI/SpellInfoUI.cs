@@ -15,6 +15,8 @@ public class SpellInfoUI : MonoBehaviour
     [SerializeField] private GameObject lightningGlyph;
 
     private string currentGlyph = string.Empty;
+    private string pendingGlyph;
+    private bool glyphApplyPending;
 
     private void Awake()
     {
@@ -31,6 +33,12 @@ public class SpellInfoUI : MonoBehaviour
 
     private void Update()
     {
+        if (glyphApplyPending)
+        {
+            glyphApplyPending = false;
+            ApplyGlyph(pendingGlyph);
+        }
+
         if (drawing == null)
         {
             return;
@@ -52,28 +60,56 @@ public class SpellInfoUI : MonoBehaviour
 
         currentGlyph = glyph;
 
+        if (!isActiveAndEnabled)
+        {
+            ApplyGlyph(glyph);
+            return;
+        }
+
+        pendingGlyph = glyph;
+        glyphApplyPending = true;
+    }
+
+    private void ApplyGlyph(string glyph)
+    {
+        string description;
+        string hint;
+
         switch (glyph)
         {
             case "火":
-                descriptionText.text = GameCopy.FireDescription;
-                hintText.text = GameCopy.FireHintShort;
+                description = GameCopy.FireDescription;
+                hint = GameCopy.FireHintShort;
                 break;
 
             case "山":
-                descriptionText.text = GameCopy.MountainDescription;
-                hintText.text = GameCopy.MountainHintShort;
+                description = GameCopy.MountainDescription;
+                hint = GameCopy.MountainHintShort;
                 break;
 
             case "电":
-                descriptionText.text = GameCopy.LightningDescription;
-                hintText.text = GameCopy.LightningHintShort;
+                description = GameCopy.LightningDescription;
+                hint = GameCopy.LightningHintShort;
                 break;
 
             default:
-                descriptionText.text = GameCopy.GenericDescription;
-                hintText.text = GameCopy.GenericHint;
+                description = GameCopy.GenericDescription;
+                hint = GameCopy.GenericHint;
                 break;
         }
+
+        SetText(descriptionText, description);
+        SetText(hintText, hint);
+    }
+
+    private static void SetText(Text target, string value)
+    {
+        if (target == null || target.text == value)
+        {
+            return;
+        }
+
+        target.text = value;
     }
 
     public void UnlockGlyph(string glyph)

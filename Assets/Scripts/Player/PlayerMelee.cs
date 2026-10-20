@@ -68,6 +68,12 @@ public class PlayerMelee : MonoBehaviour
             return;
         }
 
+        TalismanDrawingSystem drawing = TalismanDrawingSystem.Active;
+        if (drawing != null && (drawing.IsDrawing || drawing.ContainsPointer(Input.mousePosition)))
+        {
+            return;
+        }
+
         Attack();
     }
 

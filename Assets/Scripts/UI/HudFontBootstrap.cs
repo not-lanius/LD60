@@ -9,6 +9,9 @@ public class HudFontBootstrap : MonoBehaviour
 
     private void Awake()
     {
+#if UNITY_WEBGL && !UNITY_EDITOR
+        return;
+#else
         Font font = Font.CreateDynamicFontFromOSFont(preferredFonts, fontSize);
         if (font == null)
         {
@@ -32,6 +35,7 @@ public class HudFontBootstrap : MonoBehaviour
             text.rectTransform.anchoredPosition = position;
             text.SetAllDirty();
         }
+#endif
     }
 
     private static float GetVisualCenterY(Text text)
